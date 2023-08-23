@@ -1,0 +1,49 @@
+site_name: Solcast API Python SDK
+site_url: https://solcast.github.io/solcast-api-python-sdk/
+site_dir: public
+theme:
+  name: material
+  logo: 'img/logo.png'
+  palette:
+    primary: black
+    accent: yellow
+
+nav:
+  - Home: index.md
+  - Forecast: forecast.md
+  - Live: live.md
+  - Historic: historic.md
+  - TMY: tmy.md
+  - Notebooks:
+      - notebooks/Historical Solar Radiation.ipynb
+      - notebooks/Make Concurrent Requests to Live.ipynb
+      - notebooks/Query TMY in your local timezone.ipynb
+      - notebooks/Comparing Solcast API data with Surfrad measurements.ipynb
+      - notebooks/PVLib ModelChain with Solcast weather data.ipynb
+  - API reference:
+      - api/client.md
+      - api/response.md
+markdown_extensions:
+  - tables
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+
+plugins:
+  - mkdocs-jupyter
+  - mkdocstrings:
+      enabled: !ENV [ ENABLE_MKDOCSTRINGS, true ]
+      custom_templates: templates
+      default_handler: python
+      handlers:
+        python:
+          options:
+            show_source: false
