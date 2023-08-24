@@ -2,7 +2,7 @@
 
 # Solcast API Python SDK
 
-<em>simple Python SDK to access the Solcast API</em>
+<em>Python SDK to access the Solcast API</em>
 
 [![Docs](https://github.com/Solcast/solcast-api-python-sdk/actions/workflows/docs.yml/badge.svg)](https://github.com/Solcast/solcast-api-python-sdk/actions/workflows/docs.yml) [![Tests](https://github.com/Solcast/solcast-api-python-sdk/actions/workflows/test.yml/badge.svg)](https://github.com/Solcast/solcast-api-python-sdk/actions/workflows/test.yml) [![Publish 📦 to PyPI](https://github.com/Solcast/solcast-api-python-sdk/actions/workflows/publish-to-pypi.yml/badge.svg)](https://github.com/Solcast/solcast-api-python-sdk/actions/workflows/publish-to-pypi.yml)
 
@@ -12,11 +12,21 @@
 
 ## Install
 ```commandline
+pip install solcast
+```
+or from source: 
+```commandline
 git clone https://github.com/Solcast/solcast-api-python-sdk.git
 cd solcast-api-python-sdk
 pip install .
-# also pip install .[all] for the dev libs
 ```
+
+The vanilla version doesn't have any dependency. For full functionality,
+for example for getting the data into `DataFrames`, and for development, use the `[all]` tag: 
+```commandline
+pip install .[all] for the dev libs
+```
+
 ## Basic Usage
 
 ```python
