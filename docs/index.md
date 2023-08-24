@@ -42,10 +42,10 @@ Available modules are
 
 | Method       | API Docs                        |
 |--------------|---------------------------------|
-| `live`       | [solpy.live](live.md)           |
-| `historical` | [solpy.historical](historic.md) |
-| `forecast`   | [solpy.forecast](forecast.md)   |
-| `tmy`        | [solpy.tmy](tmy.md)             |
+| `live`       | [solcast.live](live.md)         |
+| `historical` | [solcast.historical](historic.md) |
+| `forecast`   | [solcast.forecast](forecast.md)   |
+| `tmy`        | [solcast.tmy](tmy.md)             |
 
 
 ## Docs
