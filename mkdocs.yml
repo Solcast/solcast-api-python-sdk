@@ -16,6 +16,7 @@ nav:
   - TMY: tmy.md
   - Notebooks:
       - notebooks/Historical Solar Radiation.ipynb
+      - notebooks/Make Concurrent Requests for Historic Timeseries.ipynb
       - notebooks/Make Concurrent Requests to Live.ipynb
       - notebooks/Query TMY in your local timezone.ipynb
       - notebooks/Comparing Solcast API data with Surfrad measurements.ipynb
