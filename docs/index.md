@@ -1,4 +1,4 @@
-# Welcome to SolPy
+# Welcome to Solcast
 A simple Python SDK that wraps [Solcast's API](https://docs.solcast.com.au/). 
 
 ## Install
@@ -40,12 +40,12 @@ df = res.to_pandas()
 
 Available modules are 
 
-| Method       | API Docs                        |
+| Module       | API Docs                        |
 |--------------|---------------------------------|
-| `live`       | [solpy.live](live.md)           |
-| `historical` | [solpy.historical](historic.md) |
-| `forecast`   | [solpy.forecast](forecast.md)   |
-| `tmy`        | [solpy.tmy](tmy.md)             |
+| `live`       | [solcast.live](live.md)           |
+| `historical` | [solcast.historical](historic.md) |
+| `forecast`   | [solcast.forecast](forecast.md)   |
+| `tmy`        | [solcast.tmy](tmy.md)             |
 
 
 ## Docs
