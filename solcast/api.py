@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from urllib.request import urlopen, Request
 import urllib.parse
 import urllib.error
+import solcast
 
 try:
     import pandas as pd
@@ -71,6 +72,7 @@ class Client:
         """
         self.base_url = base_url
         self.endpoint = endpoint
+        self.user_agent = f"solcast-api-python-sdk/{solcast.__version__}"
         self.url = self.make_url()
 
     @staticmethod
@@ -127,7 +129,10 @@ class Client:
 
         params, key = self.check_params(params)
         url = self.url + "?" + urllib.parse.urlencode(params)
-        req = Request(url, headers={"Authorization": f"Bearer {key}"})
+        req = Request(
+            url,
+            headers={"Authorization": f"Bearer {key}", "User-Agent": self.user_agent},
+        )
         try:
             with urlopen(req) as response:
                 body = response.read()

@@ -28,6 +28,10 @@ df = live.radiation_and_weather(
     output_parameters=['air_temp', 'dni', 'ghi']
 ).to_pandas()
 ```
+
+Don't forget to set your [account Api Key](https://toolkit.solcast.com.au/register) with: 
+```export SOLCAST_API_KEY={your commercial api_key}```
+
 ---
 
 ## Contributing
