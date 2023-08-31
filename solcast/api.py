@@ -129,9 +129,10 @@ class Client:
 
         params, key = self.check_params(params)
         url = self.url + "?" + urllib.parse.urlencode(params)
-        req = Request(url, headers={
-            "Authorization": f"Bearer {key}", 
-            "User-Agent": self.user_agent})
+        req = Request(
+            url,
+            headers={"Authorization": f"Bearer {key}", "User-Agent": self.user_agent},
+        )
         try:
             with urlopen(req) as response:
                 body = response.read()
