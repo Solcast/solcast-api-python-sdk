@@ -86,7 +86,7 @@ class Client:
 
         if params["api_key"] is None:
             raise ValueError(
-                "no API key provided. Either set it as a environment "
+                "no API key provided. Either set it as an environment "
                 "variable SOLCAST_API_KEY, or provide `api_key` "
                 "as an argument. Visit https://solcast.com to get an API key."
             )
