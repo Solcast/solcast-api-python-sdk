@@ -85,7 +85,11 @@ class Client:
             params.update({"api_key": os.getenv("SOLCAST_API_KEY")})
 
         if params["api_key"] is None:
-            raise ValueError("np API key provided.")
+            raise ValueError(
+                "no API key provided. Either set it as an environment "
+                "variable SOLCAST_API_KEY, or provide `api_key` "
+                "as an argument. Visit https://solcast.com to get an API key."
+            )
 
         if len(params["api_key"]) <= 1:
             raise ValueError("API key is too short.")
