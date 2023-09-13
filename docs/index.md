@@ -13,7 +13,7 @@ pip install --user solcast
 ## Usage
 !!! warning 
 
-    To access Solcast data you will need an API key. If you have the API key already,
+    To access Solcast data you will need a [commercial API key](https://toolkit.solcast.com.au/register). If you have the API key already,
     you can use it with this library either as an environment variable called SOLCAST_API_KEY,
     or you can pass it as an argument `api_key` when you call one of the library's methods. 
 
@@ -43,7 +43,7 @@ Available modules are
 | Module       | API Docs                        |
 |--------------|---------------------------------|
 | `live`       | [solcast.live](live.md)           |
-| `historical` | [solcast.historical](historic.md) |
+| `historic` | [solcast.historic](historic.md) |
 | `forecast`   | [solcast.forecast](forecast.md)   |
 | `tmy`        | [solcast.tmy](tmy.md)             |
 
