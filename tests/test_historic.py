@@ -1,3 +1,5 @@
+import pytest
+
 from solcast import historic
 from solcast.unmetered_locations import load_test_locations_coordinates
 import pandas as pd
@@ -40,15 +42,11 @@ def test_rooftop_pv_power():
 
 def test_fail_duration_and_end_date():
     lats, longs = load_test_locations_coordinates()
-
-    res = historic.radiation_and_weather(
-        latitude=lats[0],
-        longitude=longs[0],
-        start="2022-10-25T14:45:00.00Z",
-        duration="P3D",
-        end_date="2022-10-25T18:45:00.00Z",
-    )
-
-    assert res.success is False
-    assert res.code == 400
-    assert res.exception == "Must specify exactly one of duration or end_date"
+    with pytest.raises(AssertionError):
+        historic.radiation_and_weather(
+            latitude=lats[0],
+            longitude=longs[0],
+            start="2022-10-25T14:45:00.00Z",
+            duration="P3D",
+            end="2022-10-25T18:45:00.00Z",
+        )
