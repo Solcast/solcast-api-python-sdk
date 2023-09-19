@@ -3,7 +3,12 @@ from .urls import base_url, historic_radiation_and_weather, historic_rooftop_pv_
 
 
 def radiation_and_weather(
-    latitude: float, longitude: float, start: str, end: str=None, duration: str=None, **kwargs
+    latitude: float,
+    longitude: float,
+    start: str,
+    end: str = None,
+    duration: str = None,
+    **kwargs,
 ) -> Response:
     """
     Get historical irradiance and weather estimated actuals for up to 31 days of data
@@ -18,16 +23,17 @@ def radiation_and_weather(
 
     client = Client(base_url=base_url, endpoint=historic_radiation_and_weather)
 
-    assert (end is None and duration is not None) | (duration is None and end is not None), \
-        "only one of duration or end"
+    assert (end is None and duration is not None) | (
+        duration is None and end is not None
+    ), "only one of duration or end"
 
     params = {
-            "latitude": latitude,
-            "longitude": longitude,
-            "start": start,
-            "format": "json",
-            **kwargs,
-        }
+        "latitude": latitude,
+        "longitude": longitude,
+        "start": start,
+        "format": "json",
+        **kwargs,
+    }
 
     if end is not None:
         params["end"] = end
@@ -38,7 +44,12 @@ def radiation_and_weather(
 
 
 def rooftop_pv_power(
-    latitude: float, longitude: float, start: str, end: str=None, duration: str=None, **kwargs
+    latitude: float,
+    longitude: float,
+    start: str,
+    end: str = None,
+    duration: str = None,
+    **kwargs,
 ) -> Response:
     """
     Get historical basic rooftop PV power estimated actuals for the requested location,
@@ -52,16 +63,17 @@ def rooftop_pv_power(
 
     client = Client(base_url=base_url, endpoint=historic_rooftop_pv_power)
 
-    assert (end is None and duration is not None) | (duration is None and end is not None), \
-        "only one of duration or end"
+    assert (end is None and duration is not None) | (
+        duration is None and end is not None
+    ), "only one of duration or end"
 
     params = {
-            "latitude": latitude,
-            "longitude": longitude,
-            "start": start,
-            "format": "json",
-            **kwargs,
-        }
+        "latitude": latitude,
+        "longitude": longitude,
+        "start": start,
+        "format": "json",
+        **kwargs,
+    }
 
     if end is not None:
         params["end"] = end
