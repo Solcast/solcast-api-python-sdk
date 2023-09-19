@@ -14,7 +14,7 @@ nav:
   - Live: live.md
   - Historic: historic.md
   - TMY: tmy.md
-  - Notebooks:
+  - Example Notebooks:
       - notebooks/Historical Solar Radiation.ipynb
       - notebooks/Make Concurrent Requests for Historic Timeseries.ipynb
       - notebooks/Make Concurrent Requests to Live.ipynb
