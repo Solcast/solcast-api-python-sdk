@@ -8,6 +8,10 @@ def radiation_and_weather(latitude: float, longitude: float, **kwargs) -> Respon
     derived from satellite (clouds and irradiance over non-polar continental areas) and
     numerical weather models (other data). The TMY is calculated with data from 2007 to 2023.
 
+    Args:
+        latitude: in decimal degrees, between -90 and 90, north is positive
+        longitude: in decimal degrees, between -180 and 180, east is positive
+
     See https://docs.solcast.com.au/ for full list of parameters.
     """
 
@@ -23,6 +27,10 @@ def rooftop_pv_power(latitude: float, longitude: float, **kwargs) -> Response:
     Get the basic rooftop PV power estimated actuals for a Typical Meteorological Year (TMY) at a requested location,
     derived from satellite (clouds and irradiance over non-polar continental areas) and
     numerical weather models (other data). The TMY is calculated with data from 2007 to 2023.
+
+    Args:
+        latitude: in decimal degrees, between -90 and 90, north is positive
+        longitude: in decimal degrees, between -180 and 180, east is positive
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
