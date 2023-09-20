@@ -1,3 +1,5 @@
+from typing import List
+
 from .api import Client, Response
 from .urls import (
     base_url,
@@ -8,13 +10,20 @@ from .urls import (
 
 
 def radiation_and_weather(
-    latitude: float, longitude: float, output_parameters: str, **kwargs
+    latitude: float, longitude: float, output_parameters: List[str], **kwargs
 ) -> Response:
     """
     Get irradiance and weather forecasts from the present time up to 14 days ahead
     for the requested location, derived from satellite (clouds and irradiance
     over non-polar continental areas, nowcasted for approx. four hours ahead)
     and numerical weather models (other data and longer horizons).
+
+    Args:
+        latitude: in decimal degrees, between -90 and 90, north is positive
+        longitude: in decimal degrees, between -180 and 180, east is positive
+        output_parameters: list of strings with the parameters to return
+
+    See https://docs.solcast.com.au/ for full list of parameters.
     """
     client = Client(base_url=base_url, endpoint=forecast_radiation_and_weather)
 
@@ -30,13 +39,18 @@ def radiation_and_weather(
 
 
 def rooftop_pv_power(
-    latitude: float, longitude: float, output_parameters: str, **kwargs
+    latitude: float, longitude: float, output_parameters: List[str], **kwargs
 ) -> Response:
     """
     Get basic rooftop PV power forecasts from the present time up to 14 days ahead
     for the requested location, derived from satellite (clouds and irradiance
     over non-polar continental areas, nowcasted for approx. four hours ahead)
     and numerical weather models (other data and longer horizons).
+
+    Args:
+        latitude: in decimal degrees, between -90 and 90, north is positive
+        longitude: in decimal degrees, between -180 and 180, east is positive
+        output_parameters: list of strings with the parameters to return
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -59,6 +73,9 @@ def advanced_pv_power(resource_id: int, **kwargs) -> Response:
     for the requested site, derived from satellite (clouds and irradiance over
     non-polar continental areas, nowcasted for approx. four hours ahead) and
     numerical weather models (other data and longer horizons).
+
+    Args:
+        resource_id: a Solcast resource id
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """

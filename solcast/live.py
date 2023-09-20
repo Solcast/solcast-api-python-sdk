@@ -16,6 +16,11 @@ def radiation_and_weather(
     for the requested location, derived from satellite (clouds and irradiance
     over non-polar continental areas) and numerical weather models (other data).
 
+    Args:
+        latitude: in decimal degrees, between -90 and 90, north is positive
+        longitude: in decimal degrees, between -180 and 180, east is positive
+        output_parameters: list of strings with the parameters to return
+
     See https://docs.solcast.com.au/ for full list of parameters.
     """
     client = Client(base_url=base_url, endpoint=live_radiation_and_weather)
@@ -39,6 +44,10 @@ def rooftop_pv_power(latitude: float, longitude: float, **kwargs) -> Response:
     non-polar continental areas, nowcasted for approx. four hours ahead) and numerical
     weather models (other data and longer horizons).
 
+    Args:
+        latitude: in decimal degrees, between -90 and 90, north is positive
+        longitude: in decimal degrees, between -180 and 180, east is positive
+
     See https://docs.solcast.com.au/ for full list of parameters.
     """
     client = Client(base_url=base_url, endpoint=live_rooftop_pv_power)
@@ -54,6 +63,9 @@ def advanced_pv_power(resource_id: int, **kwargs) -> Response:
     the requested site, derived from satellite (clouds and irradiance
     over non-polar continental areas, nowcasted for approx. four hours ahead)
     and numerical weather models (other data and longer horizons).
+
+    Args:
+        resource_id: a Solcast resource id
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
