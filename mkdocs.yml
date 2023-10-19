@@ -15,12 +15,13 @@ nav:
   - Historic: historic.md
   - TMY: tmy.md
   - Example Notebooks:
-      - notebooks/Historical Solar Radiation.ipynb
+      - notebooks/Historic Solar Radiation.ipynb
       - notebooks/Make Concurrent Requests for Historic Timeseries.ipynb
       - notebooks/Make Concurrent Requests to Live.ipynb
       - notebooks/Query TMY in your local timezone.ipynb
       - notebooks/Comparing Solcast API data with Surfrad measurements.ipynb
       - notebooks/PVLib ModelChain with Solcast weather data.ipynb
+      - notebooks/Measurements Quality Assessments using data from the Solcast API.ipynb
   - API reference:
       - api/client.md
       - api/response.md
@@ -32,11 +33,12 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences:
+  - pymdownx.superfences
   - admonition
   - pymdownx.details
   - pymdownx.superfences
   - attr_list
+
 
 plugins:
   - mkdocs-jupyter
