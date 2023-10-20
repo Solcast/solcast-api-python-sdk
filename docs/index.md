@@ -29,6 +29,27 @@ res = live.radiation_and_weather(
 )
 ```
 
+!!! tip
+
+    When testing or developing, you should use `solcast.unmetered_locations` so that your usage isn't counted against your plan.
+   [Unmetered Locations](https://docs.solcast.com.au/#unmetered-locations) still require you to signup for a commercial API key (above).
+
+```py
+from solcast import forecast
+from solcast.unmetered_locations import UNMETERED_LOCATIONS
+sydney = UNMETERED_LOCATIONS['Sydney Opera House']
+
+res = forecast.rooftop_pv_power(
+    latitude=sydney['latitude'], 
+    longitude=sydney['longitude'],
+    period='PT5M',
+    capacity=5,  # 5KW
+    tilt=22,  # degrees
+    output_parameters='pv_power_rooftop'
+)
+```
+
+
 as a Pandas DataFrame
 
 ```python
