@@ -15,13 +15,18 @@ nav:
   - Historic: historic.md
   - TMY: tmy.md
   - Example Notebooks:
-      - notebooks/Historic Solar Radiation.ipynb
-      - notebooks/Make Concurrent Requests for Historic Timeseries.ipynb
-      - notebooks/Make Concurrent Requests to Live.ipynb
-      - notebooks/Query TMY in your local timezone.ipynb
-      - notebooks/Comparing Solcast API data with Surfrad measurements.ipynb
-      - notebooks/PVLib ModelChain with Solcast weather data.ipynb
-      - notebooks/Measurements Quality Assessments using data from the Solcast API.ipynb
+      - notebooks/1.1 Getting Data - Historic Solar Radiation.ipynb
+      - notebooks/1.2 Getting Data - TMY in your local timezone.ipynb
+      - notebooks/1.3 Getting Data - Make Concurrent Requests.ipynb
+      - notebooks/2.1 PVLib - ModelChain with Solcast weather data.ipynb
+      - notebooks/3.1 Comparing to Measurements - Timezone and Time Period alignment.ipynb
+      - notebooks/3.2 Comparing to Measurements - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb
+      - notebooks/3.3 Comparing to Measurements - Accuracy Metrics.ipynb
+      - data:
+        - notebooks/data/3.1_sample_measurements.csv
+        - notebooks/data/3.2_sample_measurements.csv
+        - notebooks/data/3.3_sample_forecasts.csv
+        - notebooks/data/3.3_sample_measurements.csv
   - API reference:
       - api/client.md
       - api/response.md
