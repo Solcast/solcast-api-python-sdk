@@ -20,11 +20,13 @@ nav:
       - '1.3 Getting Data: Make Concurrent Requests': 'notebooks/1.3 Getting Data - Make Concurrent Requests.ipynb'
       - '2.1 PVLib: ModelChain with Solcast weather data': 'notebooks/2.1 PVLib - ModelChain with Solcast weather data.ipynb'
       - '3.1 Comparing to Measurements: Timezone and Time Period alignment': 'notebooks/3.1 Comparing to Measurements - Timezone and Time Period alignment.ipynb'
-      - '3.2 Comparing to Measurements: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2 Comparing to Measurements - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
+      - '3.2 Comparing to Measurements [GHI]: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2 Comparing to Measurements [GHI] - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
+      - '3.2b Comparing to Measurements [GTI]: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2b Comparing to Measurements [GTI] - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
       - '3.3 Comparing to Measurements: Accuracy Metrics': 'notebooks/3.3 Comparing to Measurements - Accuracy Metrics.ipynb'
       - data:
         - '3.1_sample_measurements.csv': 'notebooks/data/3.1_sample_measurements.csv'
         - '3.2_sample_measurements.csv': 'notebooks/data/3.2_sample_measurements.csv'
+        - '3.2b_sample_measurements.csv': 'notebooks/data/3.2b_sample_measurements.csv'
         - '3.3_sample_forecasts.csv': 'notebooks/data/3.3_sample_forecasts.csv'
         - '3.3_sample_measurements.csv': 'notebooks/data/3.3_sample_measurements.csv'
   - API reference:
