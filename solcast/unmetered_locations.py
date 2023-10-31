@@ -29,6 +29,16 @@ UNMETERED_LOCATIONS = {
         "longitude": 78.042142,
         "resource_id": "b926-8fd2-ad3f-e4f5",
     },
+    "Fort Peck": {
+        "latitude": 48.30783,
+        "longitude": -105.1017,
+        "resource_id": "3ae7-2456-492c-9aba",
+    },
+    "Goodwin Creek": {
+        "latitude": 34.2547,
+        "longitude": -89.8729,
+        "resource_id": "b787-cf17-e429-ef1d",
+    },
 }
 
 
