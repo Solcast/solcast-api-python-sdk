@@ -8,7 +8,7 @@ from solcast.unmetered_locations import (
 def test_radiation_and_weather():
     lats, longs = load_test_locations_coordinates()
     res = forecast.radiation_and_weather(
-        latitude=lats[3], longitude=longs[3], output_parameters="albedo", hours=3
+        latitude=lats[3], longitude=longs[3], output_parameters=["albedo"], hours=3
     )
 
     assert res.success is True
@@ -21,7 +21,7 @@ def test_rooftop_pv_power():
     res = forecast.rooftop_pv_power(
         latitude=lats[3],
         longitude=longs[3],
-        output_parameters="pv_power_rooftop10",
+        output_parameters=["pv_power_rooftop10"],
         hours=3,
         capacity=1,
     )

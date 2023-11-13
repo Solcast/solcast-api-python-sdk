@@ -20,7 +20,7 @@ def radiation_and_weather(
         latitude: in decimal degrees, between -90 and 90, north is positive
         longitude: in decimal degrees, between -180 and 180, east is positive
         start: datetime-like, first day of the requested period
-        end: optional, dateime-like, last day of the requested period
+        end: optional, datetime-like, last day of the requested period
         duration: optional, ISO_8601 compliant duration for the historic data.
             Must be within 31 days of the start_date.
 
@@ -62,7 +62,7 @@ def rooftop_pv_power(
         latitude: in decimal degrees, between -90 and 90, north is positive
         longitude: in decimal degrees, between -180 and 180, east is positive
         start: datetime-like, first day of the requested period
-        end: optional, dateime-like, last day of the requested period
+        end: optional, datetime-like, last day of the requested period
         duration: optional, ISO_8601 compliant duration for the historic data.
             Must be within 31 days of the start_date.
 

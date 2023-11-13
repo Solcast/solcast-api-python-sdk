@@ -4,6 +4,8 @@ from dataclasses import dataclass
 from urllib.request import urlopen, Request
 import urllib.parse
 import urllib.error
+from typing import Optional
+
 import solcast
 
 try:
@@ -20,9 +22,9 @@ class Response:
 
     code: int
     url: str
-    data: bytes
+    data: Optional[bytes]
     success: bool
-    exception: str = None
+    exception: Optional[str] = None
 
     def __repr__(self):
         return f"status code={self.code}, url={self.url}"
