@@ -42,7 +42,7 @@ docs = [
     "pytest",
     "mkdocs",
     "mkdocs-material",
-    "mkdocstrings[python]==0.23",
+    "mkdocstrings[python]==0.22",
     "mkdocs-jupyter",
     "kaleido"
 ]
