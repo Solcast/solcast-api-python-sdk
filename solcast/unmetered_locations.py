@@ -2,12 +2,12 @@ UNMETERED_LOCATIONS = {
     "Sydney Opera House": {
         "latitude": -33.856784,
         "longitude": 151.215297,
-        "resource_id": "5f86-4c8f-2cb3-0215",
+        "resource_id": "ba75-e17a-7374-95ed",
     },
     "Grand Canyon": {
         "latitude": 36.099763,
         "longitude": -112.112485,
-        "resource_id": " 375f-eb3e-71c0-ef5e",
+        "resource_id": "375f-eb3e-71c0-ef5e",
     },
     "Stonehenge": {
         "latitude": 51.178882,
