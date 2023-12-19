@@ -45,8 +45,8 @@ Don't forget to set your [account Api Key](https://toolkit.solcast.com.au/regist
 ---
 
 ## Contributing
-Tests are run against the Solcast API, you will need a key to run them. 
-They are executed on `unmetered locations` and as such won't consume your credits.
+Tests are run against the Solcast API, you will need an API key to run them. 
+They are executed on `unmetered locations` and as such won't consume your requests.
 
 ```commandline
 pytest tests

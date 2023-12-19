@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from urllib.request import urlopen, Request
 import urllib.parse
 import urllib.error
-from typing import Optional
+from typing import Dict, Optional
 
 import solcast
 
@@ -124,10 +124,71 @@ class Client:
         return "/".join([self.base_url, self.endpoint])
 
     def get(self, params: dict) -> Response:
-        """makes the GET request.
+        """Wrap _make_request to make a GET request
 
         Args:
-            params: a dictionary of parameters that are passed in the get request
+            params: a dictionary of parameters that are passed in the GET request
+
+        Returns:
+            a Response object.
+
+        """
+        return self._make_request(params, method="GET")
+
+    def post(self, params: dict) -> Response:
+        """Wrap _make_request to make a POST request
+
+        Args:
+            params: a dictionary of parameters that are passed in the POST request
+
+        Returns:
+            a Response object.
+
+        """
+        return self._make_request(params, method="POST")
+
+    def patch(self, params: dict) -> Response:
+        """Wrap _make_request to make a PATCH request
+
+        Args:
+            params: a dictionary of parameters that are passed in the PATCH request
+
+        Returns:
+            a Response object.
+
+        """
+        return self._make_request(params, method="PATCH")
+
+    def put(self, params: dict) -> Response:
+        """Wrap _make_request to make a PUT request
+
+        Args:
+            params: a dictionary of parameters that are passed in the PUT request
+
+        Returns:
+            a Response object.
+
+        """
+        return self._make_request(params, method="PUT")
+
+    def delete(self, params: dict) -> Response:
+        """Wrap _make_request to make a DEL request
+
+        Args:
+            params: a dictionary of parameters that are passed in the DEL request
+
+        Returns:
+            a Response object.
+
+        """
+        return self._make_request(params, method="DELETE")
+
+    def _make_request(self, params: Dict, method: str) -> Response:
+        """Make a request using urllib with the HTTP method specified
+
+        Args:
+            params: a dictionary of parameters that are passed in the request
+            method: HTTP method to use
 
         Returns:
             a Response object.
@@ -138,6 +199,7 @@ class Client:
         req = Request(
             url,
             headers={"Authorization": f"Bearer {key}", "User-Agent": self.user_agent},
+            method=method,
         )
         try:
             with urlopen(req) as response:
