@@ -23,6 +23,7 @@ def radiation_and_weather(
         end: optional, datetime-like, last day of the requested period
         duration: optional, ISO_8601 compliant duration for the historic data.
             Must be within 31 days of the start_date.
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -65,6 +66,7 @@ def rooftop_pv_power(
         end: optional, datetime-like, last day of the requested period
         duration: optional, ISO_8601 compliant duration for the historic data.
             Must be within 31 days of the start_date.
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """

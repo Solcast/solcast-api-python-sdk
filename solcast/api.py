@@ -1,10 +1,11 @@
+import copy
 import json
 import os
 from dataclasses import dataclass
 from urllib.request import urlopen, Request
 import urllib.parse
 import urllib.error
-from typing import Dict, Optional
+from typing import Optional
 
 import solcast
 
@@ -24,10 +25,11 @@ class Response:
     url: str
     data: Optional[bytes]
     success: bool
+    method: str
     exception: Optional[str] = None
 
     def __repr__(self):
-        return f"status code={self.code}, url={self.url}"
+        return f"status code={self.code}, url={self.url}, method={self.method}"
 
     def to_dict(self):
         if self.code != 200:
@@ -78,22 +80,26 @@ class Client:
         self.url = self.make_url()
 
     @staticmethod
-    def check_params(params: dict) -> (dict, str):
-        """runs some basic checks on the parameters that will be passed in the
-        GET request."""
+    def _check_params(params: dict) -> (dict, str):
+        """Run basic checks on the parameters that will be passed to the HTTP request."""
         assert isinstance(params, dict), "parameters needs to be a dict"
+        params = copy.deepcopy(params)
 
-        if "api_key" not in params:
-            params.update({"api_key": os.getenv("SOLCAST_API_KEY")})
+        if "api_key" in params:
+            # api key in the header for secrecy
+            key = params["api_key"]
+            del params["api_key"]
+        else:
+            key = os.getenv("SOLCAST_API_KEY")
 
-        if params["api_key"] is None:
+        if key is None:
             raise ValueError(
                 "no API key provided. Either set it as an environment "
                 "variable SOLCAST_API_KEY, or provide `api_key` "
                 "as an argument. Visit https://solcast.com to get an API key."
             )
 
-        if len(params["api_key"]) <= 1:
+        if len(key) <= 1:
             raise ValueError("API key is too short.")
 
         if "output_parameters" in params.keys() and isinstance(
@@ -109,18 +115,15 @@ class Client:
 
         # only json supported
         if "format" in params.keys():
-            assert (
-                params["format"] == "json"
-            ), "only json response format is currently supported."
-
-        # api key in the header for secrecy
-        key = params["api_key"]
-        del params["api_key"]
+            if params["format"] != "json":
+                raise NotImplementedError(
+                    "Only json response format is currently supported."
+                )
 
         return params, key
 
     def make_url(self) -> str:
-        """composes the full URL."""
+        """Compose the full URL."""
         return "/".join([self.base_url, self.endpoint])
 
     def get(self, params: dict) -> Response:
@@ -183,7 +186,7 @@ class Client:
         """
         return self._make_request(params, method="DELETE")
 
-    def _make_request(self, params: Dict, method: str) -> Response:
+    def _make_request(self, params: dict, method: str) -> Response:
         """Make a request using urllib with the HTTP method specified
 
         Args:
@@ -194,7 +197,7 @@ class Client:
             a Response object.
         """
 
-        params, key = self.check_params(params)
+        params, key = self._check_params(params)
         url = self.url + "?" + urllib.parse.urlencode(params)
         req = Request(
             url,
@@ -205,7 +208,12 @@ class Client:
             with urlopen(req) as response:
                 body = response.read()
                 return Response(
-                    code=response.code, url=url, data=body, success=True, exception=None
+                    code=response.code,
+                    url=url,
+                    data=body,
+                    success=True,
+                    exception=None,
+                    method=method,
                 )
         except urllib.error.HTTPError as e:
             try:
@@ -218,4 +226,5 @@ class Client:
                 data=None,
                 exception=exception_message,
                 success=False,
+                method=method,
             )

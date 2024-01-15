@@ -20,6 +20,7 @@ def radiation_and_weather(
         latitude: in decimal degrees, between -90 and 90, north is positive
         longitude: in decimal degrees, between -180 and 180, east is positive
         output_parameters: list of strings with the parameters to return
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -47,6 +48,7 @@ def rooftop_pv_power(latitude: float, longitude: float, **kwargs) -> Response:
     Args:
         latitude: in decimal degrees, between -90 and 90, north is positive
         longitude: in decimal degrees, between -180 and 180, east is positive
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -66,6 +68,7 @@ def advanced_pv_power(resource_id: int, **kwargs) -> Response:
 
     Args:
         resource_id: a Solcast resource id
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """

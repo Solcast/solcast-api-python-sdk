@@ -15,12 +15,12 @@ def mock_short_key(monkeypatch):
 def test_fail_short_key(mock_short_key):
     with pytest.raises(ValueError, match="API key is too short."):
         cls = Client(base_url=base_url, endpoint=live_radiation_and_weather)
-        cls.check_params({"a": None})
+        cls._check_params({"a": None})
 
 
 def test_pass_key_in_params(mock_short_key):
     cls = Client(base_url=base_url, endpoint=live_radiation_and_weather)
-    assert cls.check_params({"api_key": "dummy"})[1] == "dummy"
+    assert cls._check_params({"api_key": "dummy"})[1] == "dummy"
 
 
 def test_client():
@@ -40,7 +40,7 @@ def test_client():
     assert res.code == 200
     assert len(res.to_dict()) == 1
 
-    params, _ = cli.check_params(
+    params, _ = cli._check_params(
         {
             "latitude": -33.8567848776324,
             "longitude": 151.215297,
@@ -55,7 +55,9 @@ def test_client():
 
 def test_response():
     raw_data = b'{"estimated_actuals":[{"ghi":54,"period_end":"2023-06-22T05:30:00.0000000Z","period":"PT30M"}]}'
-    rsp = Response(data=raw_data, url="some_url", code=200, success=True)
+    rsp = Response(
+        data=raw_data, url="some_url", code=200, success=True, method="arbitrary_method"
+    )
 
     assert rsp.success is True
     assert rsp.to_pandas().shape[0] == 1

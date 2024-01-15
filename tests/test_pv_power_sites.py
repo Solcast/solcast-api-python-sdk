@@ -2,7 +2,7 @@ from solcast import pv_power_sites, unmetered_locations
 
 
 def test_list_pv_power_sites():
-    res = pv_power_sites.list_pv_power_site()
+    res = pv_power_sites.list_pv_power_sites()
 
     assert res.success
     assert isinstance(res.to_dict(), list)
