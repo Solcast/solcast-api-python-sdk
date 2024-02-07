@@ -130,7 +130,7 @@ class ClientBase:
         """Compose the full URL."""
         return "/".join([self.base_url, self.endpoint])
 
-    def get(self, params: dict) -> ResponseWithPandas:
+    def get(self, params: dict) -> Union[Response, ResponseWithPandas]:
         """Wrap _make_request to make a GET request
 
         Args:
