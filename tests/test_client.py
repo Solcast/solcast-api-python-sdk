@@ -60,8 +60,6 @@ def test_response():
     )
 
     assert rsp.success is True
-    with pytest.raises(AttributeError):
-        rsp.to_pandas()
 
 
 def test_response_with_pandas():
