@@ -1,4 +1,4 @@
-from solcast.api import Client, Response
+from solcast.api import ClientWithPandas, ResponseWithPandas, Response
 from solcast.urls import (
     base_url,
     live_radiation_and_weather,
@@ -14,17 +14,17 @@ def mock_short_key(monkeypatch):
 
 def test_fail_short_key(mock_short_key):
     with pytest.raises(ValueError, match="API key is too short."):
-        cls = Client(base_url=base_url, endpoint=live_radiation_and_weather)
+        cls = ClientWithPandas(base_url=base_url, endpoint=live_radiation_and_weather)
         cls._check_params({"a": None})
 
 
 def test_pass_key_in_params(mock_short_key):
-    cls = Client(base_url=base_url, endpoint=live_radiation_and_weather)
+    cls = ClientWithPandas(base_url=base_url, endpoint=live_radiation_and_weather)
     assert cls._check_params({"api_key": "dummy"})[1] == "dummy"
 
 
 def test_client():
-    cli = Client(base_url=base_url, endpoint=live_radiation_and_weather)
+    cli = ClientWithPandas(base_url=base_url, endpoint=live_radiation_and_weather)
     assert cli.url.startswith("https")
 
     res = cli.get(
@@ -60,11 +60,22 @@ def test_response():
     )
 
     assert rsp.success is True
+    with pytest.raises(AttributeError):
+        rsp.to_pandas()
+
+
+def test_response_with_pandas():
+    raw_data = b'{"estimated_actuals":[{"ghi":54,"period_end":"2023-06-22T05:30:00.0000000Z","period":"PT30M"}]}'
+    rsp = ResponseWithPandas(
+        data=raw_data, url="some_url", code=200, success=True, method="arbitrary_method"
+    )
+
+    assert rsp.success is True
     assert rsp.to_pandas().shape[0] == 1
 
 
 def test_timezone():
-    cli = Client(base_url=base_url, endpoint=historic_radiation_and_weather)
+    cli = ClientWithPandas(base_url=base_url, endpoint=historic_radiation_and_weather)
     res = cli.get(
         {
             "latitude": -33.856784,

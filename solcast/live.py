@@ -1,6 +1,6 @@
 from typing import List
 
-from .api import Client, Response
+from .api import ClientWithPandas, ResponseWithPandas
 from .urls import (
     base_url,
     live_radiation_and_weather,
@@ -11,7 +11,7 @@ from .urls import (
 
 def radiation_and_weather(
     latitude: float, longitude: float, output_parameters: List[str], **kwargs
-) -> Response:
+) -> ResponseWithPandas:
     """Get irradiance and weather estimated actuals for near real-time and past 7 days
     for the requested location, derived from satellite (clouds and irradiance
     over non-polar continental areas) and numerical weather models (other data).
@@ -24,7 +24,7 @@ def radiation_and_weather(
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = Client(base_url=base_url, endpoint=live_radiation_and_weather)
+    client = ClientWithPandas(base_url=base_url, endpoint=live_radiation_and_weather)
 
     params = {
         "latitude": latitude,
@@ -39,7 +39,7 @@ def radiation_and_weather(
     return res
 
 
-def rooftop_pv_power(latitude: float, longitude: float, **kwargs) -> Response:
+def rooftop_pv_power(latitude: float, longitude: float, **kwargs) -> ResponseWithPandas:
     """Get basic rooftop PV power forecasts from the present time up to 14 days ahead
     for the requested location, derived from satellite (clouds and irradiance over
     non-polar continental areas, nowcasted for approx. four hours ahead) and numerical
@@ -52,14 +52,14 @@ def rooftop_pv_power(latitude: float, longitude: float, **kwargs) -> Response:
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = Client(base_url=base_url, endpoint=live_rooftop_pv_power)
+    client = ClientWithPandas(base_url=base_url, endpoint=live_rooftop_pv_power)
 
     return client.get(
         {"latitude": latitude, "longitude": longitude, "format": "json", **kwargs}
     )
 
 
-def advanced_pv_power(resource_id: int, **kwargs) -> Response:
+def advanced_pv_power(resource_id: int, **kwargs) -> ResponseWithPandas:
     """
     Get high spec PV power forecasts from the present time up to 14 days ahead for
     the requested site, derived from satellite (clouds and irradiance
@@ -72,6 +72,6 @@ def advanced_pv_power(resource_id: int, **kwargs) -> Response:
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = Client(base_url=base_url, endpoint=live_advanced_pv_power)
+    client = ClientWithPandas(base_url=base_url, endpoint=live_advanced_pv_power)
 
     return client.get({"resource_id": resource_id, "format": "json", **kwargs})

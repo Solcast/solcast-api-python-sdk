@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from urllib.request import urlopen, Request
 import urllib.parse
 import urllib.error
-from typing import Optional
+from typing import Optional, Union
 
 import solcast
 
@@ -36,6 +36,10 @@ class Response:
             raise Exception(self.exception)
         return json.loads(self.data)
 
+
+class ResponseWithPandas(Response):
+    """Class to handle API response from the Solcast API, with pandas integration."""
+
     def to_pandas(self):
         """returns the data as a Pandas DataFrame.
         Some common processing is applied,
@@ -65,8 +69,8 @@ class Response:
         return dfs
 
 
-class Client:
-    """Handles all API get requests for the different endpoints."""
+class ClientBase:
+    """Base class for handling all API get requests for the different endpoints."""
 
     def __init__(self, base_url: str, endpoint: str):
         """
@@ -126,7 +130,7 @@ class Client:
         """Compose the full URL."""
         return "/".join([self.base_url, self.endpoint])
 
-    def get(self, params: dict) -> Response:
+    def get(self, params: dict) -> ResponseWithPandas:
         """Wrap _make_request to make a GET request
 
         Args:
@@ -138,7 +142,7 @@ class Client:
         """
         return self._make_request(params, method="GET")
 
-    def post(self, params: dict) -> Response:
+    def post(self, params: dict) -> Union[Response, ResponseWithPandas]:
         """Wrap _make_request to make a POST request
 
         Args:
@@ -150,7 +154,7 @@ class Client:
         """
         return self._make_request(params, method="POST")
 
-    def patch(self, params: dict) -> Response:
+    def patch(self, params: dict) -> Union[Response, ResponseWithPandas]:
         """Wrap _make_request to make a PATCH request
 
         Args:
@@ -162,7 +166,7 @@ class Client:
         """
         return self._make_request(params, method="PATCH")
 
-    def put(self, params: dict) -> Response:
+    def put(self, params: dict) -> Union[Response, ResponseWithPandas]:
         """Wrap _make_request to make a PUT request
 
         Args:
@@ -174,7 +178,7 @@ class Client:
         """
         return self._make_request(params, method="PUT")
 
-    def delete(self, params: dict) -> Response:
+    def delete(self, params: dict) -> Union[Response, ResponseWithPandas]:
         """Wrap _make_request to make a DEL request
 
         Args:
@@ -186,7 +190,9 @@ class Client:
         """
         return self._make_request(params, method="DELETE")
 
-    def _make_request(self, params: dict, method: str) -> Response:
+    def _make_request(
+        self, params: dict, method: str
+    ) -> Union[Response, ResponseWithPandas]:
         """Make a request using urllib with the HTTP method specified
 
         Args:
@@ -207,7 +213,7 @@ class Client:
         try:
             with urlopen(req) as response:
                 body = response.read()
-                return Response(
+                return self.Response(
                     code=response.code,
                     url=url,
                     data=body,
@@ -220,7 +226,7 @@ class Client:
                 exception_message = json.loads(e.read())["response_status"]["message"]
             except:
                 exception_message = "Undefined Error"
-            return Response(
+            return self.Response(
                 code=e.code,
                 url=e.url,
                 data=None,
@@ -228,3 +234,35 @@ class Client:
                 success=False,
                 method=method,
             )
+
+
+class ClientWithPandas(ClientBase):
+    """
+    Handles all API get requests for the endpoints for which
+    pandas integration is appropriate.
+    """
+
+    def __init__(self, base_url: str, endpoint: str):
+        """
+        Args:
+            base_url: the base URL to Solcast API
+            endpoint: one of Solcast API's endpoints
+        """
+        super().__init__(base_url, endpoint)
+        self.Response = ResponseWithPandas
+
+
+class ClientWithoutPandas(ClientBase):
+    """
+    Handles all API get requests for the endpoints where
+    pandas integration is not appropriate.
+    """
+
+    def __init__(self, base_url: str, endpoint: str):
+        """
+        Args:
+            base_url: the base URL to Solcast API
+            endpoint: one of Solcast API's endpoints
+        """
+        super().__init__(base_url, endpoint)
+        self.Response = Response
