@@ -1,10 +1,10 @@
-from .api import ClientWithPandas, ResponseWithPandas
+from .api import Client, PandafiableResponse
 from .urls import base_url, tmy_radiation_and_weather, tmy_rooftop_pv_power
 
 
 def radiation_and_weather(
     latitude: float, longitude: float, **kwargs
-) -> ResponseWithPandas:
+) -> PandafiableResponse:
     """
     Get the irradiance and weather for a Typical Meteorological Year (TMY) at a requested location,
     derived from satellite (clouds and irradiance over non-polar continental areas) and
@@ -18,14 +18,20 @@ def radiation_and_weather(
     See https://docs.solcast.com.au/ for full list of parameters.
     """
 
-    client = ClientWithPandas(base_url=base_url, endpoint=tmy_radiation_and_weather)
+    client = Client(
+        base_url=base_url,
+        endpoint=tmy_radiation_and_weather,
+        ResponseType=PandafiableResponse,
+    )
 
     return client.get(
         {"latitude": latitude, "longitude": longitude, "format": "json", **kwargs}
     )
 
 
-def rooftop_pv_power(latitude: float, longitude: float, **kwargs) -> ResponseWithPandas:
+def rooftop_pv_power(
+    latitude: float, longitude: float, **kwargs
+) -> PandafiableResponse:
     """
     Get the basic rooftop PV power estimated actuals for a Typical Meteorological Year (TMY) at a requested location,
     derived from satellite (clouds and irradiance over non-polar continental areas) and
@@ -39,7 +45,11 @@ def rooftop_pv_power(latitude: float, longitude: float, **kwargs) -> ResponseWit
     See https://docs.solcast.com.au/ for full list of parameters.
     """
 
-    client = ClientWithPandas(base_url=base_url, endpoint=tmy_rooftop_pv_power)
+    client = Client(
+        base_url=base_url,
+        endpoint=tmy_rooftop_pv_power,
+        ResponseType=PandafiableResponse,
+    )
 
     return client.get(
         {"latitude": latitude, "longitude": longitude, "format": "json", **kwargs}

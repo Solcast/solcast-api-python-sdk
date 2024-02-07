@@ -1,4 +1,4 @@
-from solcast.api import ClientWithPandas, ResponseWithPandas, Response
+from solcast.api import Client, PandafiableResponse, Response
 from solcast.urls import (
     base_url,
     live_radiation_and_weather,
@@ -14,17 +14,29 @@ def mock_short_key(monkeypatch):
 
 def test_fail_short_key(mock_short_key):
     with pytest.raises(ValueError, match="API key is too short."):
-        cls = ClientWithPandas(base_url=base_url, endpoint=live_radiation_and_weather)
+        cls = Client(
+            base_url=base_url,
+            endpoint=live_radiation_and_weather,
+            ResponseType=PandafiableResponse,
+        )
         cls._check_params({"a": None})
 
 
 def test_pass_key_in_params(mock_short_key):
-    cls = ClientWithPandas(base_url=base_url, endpoint=live_radiation_and_weather)
+    cls = Client(
+        base_url=base_url,
+        endpoint=live_radiation_and_weather,
+        ResponseType=PandafiableResponse,
+    )
     assert cls._check_params({"api_key": "dummy"})[1] == "dummy"
 
 
 def test_client():
-    cli = ClientWithPandas(base_url=base_url, endpoint=live_radiation_and_weather)
+    cli = Client(
+        base_url=base_url,
+        endpoint=live_radiation_and_weather,
+        ResponseType=PandafiableResponse,
+    )
     assert cli.url.startswith("https")
 
     res = cli.get(
@@ -62,9 +74,9 @@ def test_response():
     assert rsp.success is True
 
 
-def test_response_with_pandas():
+def test_pandafiable_response():
     raw_data = b'{"estimated_actuals":[{"ghi":54,"period_end":"2023-06-22T05:30:00.0000000Z","period":"PT30M"}]}'
-    rsp = ResponseWithPandas(
+    rsp = PandafiableResponse(
         data=raw_data, url="some_url", code=200, success=True, method="arbitrary_method"
     )
 
@@ -73,7 +85,11 @@ def test_response_with_pandas():
 
 
 def test_timezone():
-    cli = ClientWithPandas(base_url=base_url, endpoint=historic_radiation_and_weather)
+    cli = Client(
+        base_url=base_url,
+        endpoint=historic_radiation_and_weather,
+        ResponseType=PandafiableResponse,
+    )
     res = cli.get(
         {
             "latitude": -33.856784,

@@ -1,4 +1,4 @@
-from .api import ClientWithPandas, ResponseWithPandas
+from .api import Client, PandafiableResponse
 from .urls import base_url, historic_radiation_and_weather, historic_rooftop_pv_power
 
 
@@ -9,7 +9,7 @@ def radiation_and_weather(
     end: str = None,
     duration: str = None,
     **kwargs,
-) -> ResponseWithPandas:
+) -> PandafiableResponse:
     """
     Get historical irradiance and weather estimated actuals for up to 31 days of data
     at a time for a requested location, derived from satellite (clouds and irradiance
@@ -28,8 +28,10 @@ def radiation_and_weather(
     See https://docs.solcast.com.au/ for full list of parameters.
     """
 
-    client = ClientWithPandas(
-        base_url=base_url, endpoint=historic_radiation_and_weather
+    client = Client(
+        base_url=base_url,
+        endpoint=historic_radiation_and_weather,
+        ResponseType=PandafiableResponse,
     )
 
     params = {
@@ -55,7 +57,7 @@ def rooftop_pv_power(
     end: str = None,
     duration: str = None,
     **kwargs,
-) -> ResponseWithPandas:
+) -> PandafiableResponse:
     """
     Get historical basic rooftop PV power estimated actuals for the requested location,
     derived from satellite (clouds and irradiance over non-polar continental areas)
@@ -73,7 +75,11 @@ def rooftop_pv_power(
     See https://docs.solcast.com.au/ for full list of parameters.
     """
 
-    client = ClientWithPandas(base_url=base_url, endpoint=historic_rooftop_pv_power)
+    client = Client(
+        base_url=base_url,
+        endpoint=historic_rooftop_pv_power,
+        ResponseType=PandafiableResponse,
+    )
 
     assert (end is None and duration is not None) | (
         duration is None and end is not None

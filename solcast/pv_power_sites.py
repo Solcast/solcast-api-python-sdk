@@ -1,4 +1,4 @@
-from .api import ClientWithoutPandas, Response
+from .api import Client, Response
 from .urls import base_url, pv_power_site, pv_power_sites
 
 
@@ -11,7 +11,7 @@ def list_pv_power_sites(**kwargs) -> Response:
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = ClientWithoutPandas(base_url=base_url, endpoint=pv_power_sites)
+    client = Client(base_url=base_url, endpoint=pv_power_sites, ResponseType=Response)
 
     params = {"format": "json", **kwargs}
 
@@ -30,7 +30,7 @@ def get_pv_power_site(resource_id: str, **kwargs) -> Response:
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = ClientWithoutPandas(base_url=base_url, endpoint=pv_power_site)
+    client = Client(base_url=base_url, endpoint=pv_power_site, ResponseType=Response)
 
     params = {"resource_id": resource_id, "format": "json", **kwargs}
 
@@ -56,7 +56,7 @@ def create_pv_power_site(
 
     See https://docs.solcast.com.au/ for more information and full list of parameters.
     """
-    client = ClientWithoutPandas(base_url=base_url, endpoint=pv_power_site)
+    client = Client(base_url=base_url, endpoint=pv_power_site, ResponseType=Response)
 
     params = {
         "name": name,
@@ -81,7 +81,7 @@ def patch_pv_power_site(resource_id: str, **kwargs) -> Response:
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = ClientWithoutPandas(base_url=base_url, endpoint=pv_power_site)
+    client = Client(base_url=base_url, endpoint=pv_power_site, ResponseType=Response)
 
     params = {
         "resource_id": resource_id,
@@ -104,7 +104,7 @@ def update_pv_power_site(resource_id: str, **kwargs) -> Response:
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = ClientWithoutPandas(base_url=base_url, endpoint=pv_power_site)
+    client = Client(base_url=base_url, endpoint=pv_power_site, ResponseType=Response)
 
     params = {
         "resource_id": resource_id,
@@ -127,7 +127,7 @@ def delete_pv_power_site(resource_id: str, **kwargs) -> Response:
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = ClientWithoutPandas(base_url=base_url, endpoint=pv_power_site)
+    client = Client(base_url=base_url, endpoint=pv_power_site, ResponseType=Response)
 
     params = {"resource_id": resource_id, "format": "json", **kwargs}
 
