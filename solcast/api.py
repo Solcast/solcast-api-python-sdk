@@ -34,6 +34,8 @@ class Response:
     def to_dict(self):
         if self.code != 200:
             raise Exception(self.exception)
+        if self.code == 204:  # Case of valid no content
+            return dict()
         return json.loads(self.data)
 
 

@@ -1,7 +1,7 @@
 # PV Power Sites
-Allows management of detailed PV power site metadata used by the `advanced_pv_power` endpoints.  Sites are identified via their `resource_id` string.  More information is in the [API docs](https://docs.solcast.com.au/#49090b36-66db-4d0f-89d5-87d19f00bec1).
+Allows management of detailed PV power site metadata used by the `advanced_pv_power` functions.  More information is in the [API docs](https://docs.solcast.com.au/#49090b36-66db-4d0f-89d5-87d19f00bec1).
 
-The module `pv_power_sites` has 6 available functions.
+The module `pv_power_sites` has 6 available functions. Use the `res.to_dict()` method to see the site metadata.
 
 | Endpoint | Purpose | API Docs |
 |------|------|------|
@@ -17,19 +17,50 @@ The module `pv_power_sites` has 6 available functions.
 ```python
 from solcast import pv_power_sites
 
-res = forecast.radiation_and_weather(
-    latitude=-33.856784,
-    longitude=151.215297,
-    output_parameters='air_temp'
-)
+# Use pv_power_sites.list_pv_power_sites to find the resource_id
+res = pv_power_sites.get_pv_power_site('ba75-e17a-7374-95ed')
 
-res.to_pandas().head()
+res.to_dict()
 ```
+{'resource_id': 'ba75-e17a-7374-95ed',  
+ 'name': 'Test Site: Sydney Opera House',  
+ 'latitude': -33.856784,  
+ 'longitude': 151.215297,  
+ 'capacity': 10,  
+ 'capacity_dc': 15,  
+ 'azimuth': 0,  
+ 'tilt': 30.22,  
+ 'tracking_type': 'horizontal_single_axis',  
+ 'install_date': '2021-07-01T00:00:00.0000000Z',  
+ 'module_type': 'poly-si',  
+ 'ground_coverage_ratio': 0.47,  
+ 'derating_temp_module': 0.0039,  
+ 'derating_age_system': 0.0059,  
+ 'derating_other_system': 0.07,  
+ 'inverter_peak_efficiency': 0.985,  
+ 'tracker_axis_azimuth': 0,  
+ 'tracker_max_rotation_angle': 60,  
+ 'tracker_back_tracking': True,  
+ 'tracker_smart_tracking': False,  
+ 'terrain_slope': 0,  
+ 'terrain_azimuth': 0,  
+ 'dust_soiling_average': [0.015,  
+  0.015,  
+  0.015,  
+  0.015,  
+  0.015,  
+  0.015,  
+  0.015,  
+  0.015,  
+  0.015,  
+  0.015,  
+  0.015,  
+  0.015],  
+ 'bifacial_system': False, 
+ 'site_ground_albedo': 0.25,  
+ 'bifaciality_factor': 0.7,  
+ 'pvrow_height': 1.5,  
+ 'pvrow_width': 2,  
+ 'is_unmetered': True,  
+ 'confirmed_metadata': '2023-12-19T07:18:21.2378120Z'}
 
-| period_end                |   air_temp |
-|:--------------------------|-----------:|
-| 2023-08-18 04:00:00+00:00 |         16 |
-| 2023-08-18 04:30:00+00:00 |         15 |
-| 2023-08-18 05:00:00+00:00 |         15 |
-| 2023-08-18 05:30:00+00:00 |         15 |
-| 2023-08-18 06:00:00+00:00 |         15 |
