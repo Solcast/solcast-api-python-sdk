@@ -1,7 +1,7 @@
 # PV Power Sites
 Allows management of detailed PV power site metadata used by the `advanced_pv_power` functions.  More information is in the [API docs](https://docs.solcast.com.au/#49090b36-66db-4d0f-89d5-87d19f00bec1).
 
-The module `pv_power_sites` has 6 available functions. Use the `res.to_dict()` method to see the site metadata.
+The module `pv_power_sites` has 6 functions available. Use the `res.to_dict()` method to see the site metadata.
 
 | Endpoint | Purpose | API Docs |
 |------|------|------|

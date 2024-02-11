@@ -17,7 +17,7 @@ def test_fail_short_key(mock_short_key):
         cls = Client(
             base_url=base_url,
             endpoint=live_radiation_and_weather,
-            ResponseType=PandafiableResponse,
+            response_type=PandafiableResponse,
         )
         cls._check_params({"a": None})
 
@@ -26,7 +26,7 @@ def test_pass_key_in_params(mock_short_key):
     cls = Client(
         base_url=base_url,
         endpoint=live_radiation_and_weather,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
     assert cls._check_params({"api_key": "dummy"})[1] == "dummy"
 
@@ -35,7 +35,7 @@ def test_client():
     cli = Client(
         base_url=base_url,
         endpoint=live_radiation_and_weather,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
     assert cli.url.startswith("https")
 
@@ -88,7 +88,7 @@ def test_timezone():
     cli = Client(
         base_url=base_url,
         endpoint=historic_radiation_and_weather,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
     res = cli.get(
         {

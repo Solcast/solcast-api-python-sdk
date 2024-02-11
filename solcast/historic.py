@@ -31,7 +31,7 @@ def radiation_and_weather(
     client = Client(
         base_url=base_url,
         endpoint=historic_radiation_and_weather,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
 
     params = {
@@ -78,7 +78,7 @@ def rooftop_pv_power(
     client = Client(
         base_url=base_url,
         endpoint=historic_rooftop_pv_power,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
 
     assert (end is None and duration is not None) | (

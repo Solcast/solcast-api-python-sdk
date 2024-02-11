@@ -21,7 +21,7 @@ def radiation_and_weather(
     client = Client(
         base_url=base_url,
         endpoint=tmy_radiation_and_weather,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
 
     return client.get(
@@ -48,7 +48,7 @@ def rooftop_pv_power(
     client = Client(
         base_url=base_url,
         endpoint=tmy_rooftop_pv_power,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
 
     return client.get(

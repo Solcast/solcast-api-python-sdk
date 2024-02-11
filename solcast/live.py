@@ -27,7 +27,7 @@ def radiation_and_weather(
     client = Client(
         base_url=base_url,
         endpoint=live_radiation_and_weather,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
 
     params = {
@@ -61,7 +61,7 @@ def rooftop_pv_power(
     client = Client(
         base_url=base_url,
         endpoint=live_rooftop_pv_power,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
 
     return client.get(
@@ -85,7 +85,7 @@ def advanced_pv_power(resource_id: int, **kwargs) -> PandafiableResponse:
     client = Client(
         base_url=base_url,
         endpoint=live_advanced_pv_power,
-        ResponseType=PandafiableResponse,
+        response_type=PandafiableResponse,
     )
 
     return client.get({"resource_id": resource_id, "format": "json", **kwargs})

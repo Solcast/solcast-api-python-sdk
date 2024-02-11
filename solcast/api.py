@@ -74,7 +74,7 @@ class PandafiableResponse(Response):
 class Client:
     """Handles all API get requests for the different endpoints."""
 
-    def __init__(self, base_url: str, endpoint: str, ResponseType: Response):
+    def __init__(self, base_url: str, endpoint: str, response_type: Response):
         """
         Args:
             base_url: the base URL to Solcast API
@@ -83,7 +83,7 @@ class Client:
         self.base_url = base_url
         self.endpoint = endpoint
         self.user_agent = f"solcast-api-python-sdk/{solcast.__version__}"
-        self.Response = ResponseType
+        self.response = response_type
         self.url = self.make_url()
 
     @staticmethod
@@ -214,7 +214,7 @@ class Client:
         try:
             with urlopen(req) as response:
                 body = response.read()
-                return self.Response(
+                return self.response(
                     code=response.code,
                     url=url,
                     data=body,
@@ -227,7 +227,7 @@ class Client:
                 exception_message = json.loads(e.read())["response_status"]["message"]
             except:
                 exception_message = "Undefined Error"
-            return self.Response(
+            return self.response(
                 code=e.code,
                 url=e.url,
                 data=None,
