@@ -14,6 +14,7 @@ nav:
   - Live: live.md
   - Historic: historic.md
   - TMY: tmy.md
+  - PV Power Sites: pv_power_sites.md
   - Example Notebooks:
       - '1.1 Getting Data: Historic Solar Radiation': 'notebooks/1.1 Getting Data - Historic Solar Radiation.ipynb'
       - '1.2 Getting Data: TMY in your local timezone': 'notebooks/1.2 Getting Data - TMY in your local timezone.ipynb'

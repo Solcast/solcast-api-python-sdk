@@ -56,7 +56,7 @@ res.to_dict()
   0.015,  
   0.015,  
   0.015],  
- 'bifacial_system': False, 
+ 'bifacial_system': False,  
  'site_ground_albedo': 0.25,  
  'bifaciality_factor': 0.7,  
  'pvrow_height': 1.5,  
