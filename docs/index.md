@@ -50,13 +50,18 @@ res = forecast.rooftop_pv_power(
 ```
 
 
-as a Pandas DataFrame
+Where the data returned is a timeseries, the response can be converted to a Pandas DataFrame as follows.  This is available for all the modules apart from `pv_power_sites`.
 
 ```python
 df = res.to_pandas()
 ```
 !!! info
     Pandas is not installed by default to keep the environment light. It is installed with the [all] tag
+
+For all the modules, data can be extracted in Python dictionary format.
+```python
+df = res.to_dict()
+```
 
 
 Available modules are 
@@ -67,6 +72,7 @@ Available modules are
 | `historic` | [solcast.historic](historic.md) |
 | `forecast`   | [solcast.forecast](forecast.md)   |
 | `tmy`        | [solcast.tmy](tmy.md)             |
+| `pv_power_sites` | [solcast.pv_power_sites](pv_power_sites) |
 
 
 ## Docs

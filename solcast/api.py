@@ -34,7 +34,13 @@ class Response:
     def to_dict(self):
         if self.code != 200:
             raise Exception(self.exception)
+        if self.code == 204:  # Case of valid no content
+            return dict()
         return json.loads(self.data)
+
+
+class PandafiableResponse(Response):
+    """Class to handle API response from the Solcast API, with pandas integration."""
 
     def to_pandas(self):
         """returns the data as a Pandas DataFrame.
@@ -68,7 +74,7 @@ class Response:
 class Client:
     """Handles all API get requests for the different endpoints."""
 
-    def __init__(self, base_url: str, endpoint: str):
+    def __init__(self, base_url: str, endpoint: str, response_type: Response):
         """
         Args:
             base_url: the base URL to Solcast API
@@ -77,6 +83,7 @@ class Client:
         self.base_url = base_url
         self.endpoint = endpoint
         self.user_agent = f"solcast-api-python-sdk/{solcast.__version__}"
+        self.response = response_type
         self.url = self.make_url()
 
     @staticmethod
@@ -207,7 +214,7 @@ class Client:
         try:
             with urlopen(req) as response:
                 body = response.read()
-                return Response(
+                return self.response(
                     code=response.code,
                     url=url,
                     data=body,
@@ -220,7 +227,7 @@ class Client:
                 exception_message = json.loads(e.read())["response_status"]["message"]
             except:
                 exception_message = "Undefined Error"
-            return Response(
+            return self.response(
                 code=e.code,
                 url=e.url,
                 data=None,

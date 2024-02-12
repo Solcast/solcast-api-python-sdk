@@ -1,6 +1,6 @@
 from typing import List
 
-from .api import Client, Response
+from .api import Client, PandafiableResponse
 from .urls import (
     base_url,
     forecast_rooftop_pv_power,
@@ -11,7 +11,7 @@ from .urls import (
 
 def radiation_and_weather(
     latitude: float, longitude: float, output_parameters: List[str], **kwargs
-) -> Response:
+) -> PandafiableResponse:
     """
     Get irradiance and weather forecasts from the present time up to 14 days ahead
     for the requested location, derived from satellite (clouds and irradiance
@@ -26,7 +26,11 @@ def radiation_and_weather(
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = Client(base_url=base_url, endpoint=forecast_radiation_and_weather)
+    client = Client(
+        base_url=base_url,
+        endpoint=forecast_radiation_and_weather,
+        response_type=PandafiableResponse,
+    )
 
     return client.get(
         {
@@ -41,7 +45,7 @@ def radiation_and_weather(
 
 def rooftop_pv_power(
     latitude: float, longitude: float, output_parameters: List[str], **kwargs
-) -> Response:
+) -> PandafiableResponse:
     """
     Get basic rooftop PV power forecasts from the present time up to 14 days ahead
     for the requested location, derived from satellite (clouds and irradiance
@@ -56,7 +60,11 @@ def rooftop_pv_power(
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = Client(base_url=base_url, endpoint=forecast_rooftop_pv_power)
+    client = Client(
+        base_url=base_url,
+        endpoint=forecast_rooftop_pv_power,
+        response_type=PandafiableResponse,
+    )
 
     return client.get(
         {
@@ -69,7 +77,7 @@ def rooftop_pv_power(
     )
 
 
-def advanced_pv_power(resource_id: int, **kwargs) -> Response:
+def advanced_pv_power(resource_id: int, **kwargs) -> PandafiableResponse:
     """
     Get high spec PV power forecasts from the present time up to 14 days ahead
     for the requested site, derived from satellite (clouds and irradiance over
@@ -82,6 +90,10 @@ def advanced_pv_power(resource_id: int, **kwargs) -> Response:
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = Client(base_url=base_url, endpoint=forecast_advanced_pv_power)
+    client = Client(
+        base_url=base_url,
+        endpoint=forecast_advanced_pv_power,
+        response_type=PandafiableResponse,
+    )
 
     return client.get({"resource_id": resource_id, "format": "json", **kwargs})
