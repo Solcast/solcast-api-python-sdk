@@ -32,7 +32,7 @@ class Response:
         return f"status code={self.code}, url={self.url}, method={self.method}"
 
     def to_dict(self):
-        if self.code != 200:
+        if self.code not in [200, 204]:
             raise Exception(self.exception)
         if self.code == 204:  # Case of valid no content
             return dict()
