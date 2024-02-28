@@ -22,7 +22,7 @@ res = pv_power_sites.get_pv_power_site('ba75-e17a-7374-95ed')
 
 res.to_dict()
 ```
-``` bash
+```
 {
     'resource_id': 'ba75-e17a-7374-95ed',  
     'name': 'Test Site: Sydney Opera House',  
