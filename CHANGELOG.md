@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.4] - 2024-04-19
+
+- Add pv_power_sites to package \_\_init\_\_
+
 ## [1.2.2] - 2024-02-28
 
 - Add example notebook showing use of `pv_power_sites` module
