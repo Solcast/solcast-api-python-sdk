@@ -24,6 +24,7 @@ nav:
       - '3.2 Comparing to Measurements [GHI]: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2 Comparing to Measurements [GHI] - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
       - '3.2b Comparing to Measurements [GTI]: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2b Comparing to Measurements [GTI] - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
       - '3.3 Comparing to Measurements: Accuracy Metrics': 'notebooks/3.3 Comparing to Measurements - Accuracy Metrics.ipynb'
+      - '3.4 Rooftop PV Tuning': 'notebooks/3.4 Rooftop PV Tuning.ipynb'
       - '4.1 Advanced PV Power: Setting up and Using PV Sites': 'notebooks/4.1 Setting up and Using PV Sites.ipynb'
       - data:
         - '3.1_sample_measurements.csv': 'notebooks/data/3.1_sample_measurements.csv'
@@ -31,6 +32,7 @@ nav:
         - '3.2b_sample_measurements.csv': 'notebooks/data/3.2b_sample_measurements.csv'
         - '3.3_sample_forecasts.csv': 'notebooks/data/3.3_sample_forecasts.csv'
         - '3.3_sample_measurements.csv': 'notebooks/data/3.3_sample_measurements.csv'
+        - '3.4_sample_measurements.csv': 'notebooks/data/3.4_sample_measurements.csv'
   - API reference:
       - api/client.md
       - api/response.md
