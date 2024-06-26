@@ -7,14 +7,10 @@ import requests
 
 #context = ssl.create_default_context(cafile=certifi.where())
 
-print(certifi.where())
-def get_api_response(latitude, longitude, duration):
+def get_api_response(latitude, longitude, duration, startdate):
     # Replace 'YOUR_API_KEY' with your actual API key
     api_key = 'YOUR_API_KEY'
-    print(f'Lat: ', latitude)
-    print(f'Long: ', longitude)
-    print(f'Dur: ', duration)
-    url = f'https://api.solcast.com.au/data/historic/radiation_and_weather?latitude={latitude}&longitude={longitude}&duration={duration}&format=json&time_zone=utc&output_parameters=ghi,snow_soiling_rooftop&hours=24&period=PT60M&start=2024-01-01T00:00:00.000Z&key={api_key}'
+    url = f'https://api.solcast.com.au/data/historic/radiation_and_weather?latitude={latitude}&longitude={longitude}&duration={duration}&format=json&time_zone=utc&output_parameters=ghi,snow_soiling_rooftop&hours=24&period=PT60M&start={startdate}T00:00:00.000Z&key={api_key}'
     response = requests.get(url)
     if response.status_code == 200:
         try:
@@ -41,7 +37,8 @@ def process_csv(csv_file):
             latitude = row['latitude']
             longitude = row['longitude']
             duration = row['duration']
-            api_response = get_api_response(latitude, longitude, duration)
+            startdate = row['startdate']
+            api_response = get_api_response(latitude, longitude, duration, startdate)
             if api_response:
                 data.append(api_response)
     return data
