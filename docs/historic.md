@@ -31,3 +31,23 @@ res.to_pandas().head()
 | 2022-06-01 07:30:00+00:00 |         13 |     0 |     0 |
 | 2022-06-01 08:00:00+00:00 |         12 |     0 |     0 |
 | 2022-06-01 08:30:00+00:00 |         12 |     0 |     0 |
+
+
+### Example of multi period request
+
+```python
+from solcast import historic
+import pandas as pd
+
+start_str = '2020-01-01'
+start = pd.Timestamp(start_str)
+days_required = 356
+days = 0
+
+while days < days_required:
+    startdate = start + pd.DateOffset(days=days)
+    startdate_str = startdate.strftime('%Y-%m-%d')
+    res = historic.radiation_and_weather(latitude=-33.856784, longitude=151.215297, start=startdate_str, duration='P31D',api_key='YOUR_API_KEY')
+    days += 31
+
+```
