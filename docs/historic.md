@@ -51,7 +51,7 @@ start_dates = pd.date_range(start=start_date, periods=12, freq='MS')
 
 for start in start_dates:
     start_str = start.strftime('%Y-%m-%dT00:00:00.000Z')
-    end_date =  (start + pd.offsets.MonthEnd(1)).strftime('%Y-%m-%dT11:59:59.000Z')
+    end_date =  (start + pd.offsets.MonthEnd(1)).strftime('%Y-%m-%dT23:59:59.000Z')
     
     res = historic.radiation_and_weather(latitude=latitude, longitude=longitude, start=start_str, end=end_date)
     if res.success:
@@ -59,5 +59,5 @@ for start in start_dates:
     else:
         print(res.exception)
 
-output = pd.concat(data, ignore_index=True)
+output = pd.concat(data)
 ```
