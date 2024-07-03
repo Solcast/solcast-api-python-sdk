@@ -33,8 +33,8 @@ res.to_pandas().head()
 | 2022-06-01 08:30:00+00:00 |         12 |     0 |     0 |
 
 
-### Example of multi period request for the year of 2023 from Jan 01
-# The below code is using an unmetered location. If using a metered location, it will consume 12 request.
+## Example of multi period request for the year of 2023 from Jan 01
+### The below code is using an unmetered location. If using a metered location, it will consume 12 request.
 
 ```python
 from solcast import historic
