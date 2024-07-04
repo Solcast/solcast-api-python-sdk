@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.5] - 2024-07-05
+
+- Add advanced_pv_power to the historic module
+
 ## [1.2.4] - 2024-04-19
 
 - Add pv_power_sites to package \_\_init\_\_
