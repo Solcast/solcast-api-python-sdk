@@ -116,7 +116,6 @@ def advanced_pv_power(
 
     Args:
         resource_id: a Solcast resource id
-        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
         start: datetime-like, first day of the requested period
         end: optional, datetime-like, last day of the requested period
         duration: optional, ISO_8601 compliant duration for the historic data.
