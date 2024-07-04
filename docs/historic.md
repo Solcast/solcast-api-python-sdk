@@ -31,3 +31,33 @@ res.to_pandas().head()
 | 2022-06-01 07:30:00+00:00 |         13 |     0 |     0 |
 | 2022-06-01 08:00:00+00:00 |         12 |     0 |     0 |
 | 2022-06-01 08:30:00+00:00 |         12 |     0 |     0 |
+
+
+## Example of multi period request for the year of 2023 from Jan 01
+### The below code is using an unmetered location. If using a metered location, it will consume 12 request.
+
+```python
+from solcast import historic
+import pandas as pd
+from solcast.unmetered_locations import UNMETERED_LOCATIONS
+from solcast import historic
+
+site = UNMETERED_LOCATIONS["Stonehenge"]
+latitude, longitude = site["latitude"], site["longitude"]
+
+data = []
+start_date = '2023-01-01'
+start_dates = pd.date_range(start=start_date, periods=12, freq='MS')
+
+for start in start_dates:
+    start_str = start.strftime('%Y-%m-%dT00:00:00.000Z')
+    end_date =  (start + pd.offsets.MonthEnd(1)).strftime('%Y-%m-%dT23:59:59.000Z')
+    
+    res = historic.radiation_and_weather(latitude=latitude, longitude=longitude, start=start_str, end=end_date)
+    if res.success:
+        data.append(res.to_pandas())
+    else:
+        print(res.exception)
+
+output = pd.concat(data)
+```
