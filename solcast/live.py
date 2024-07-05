@@ -46,7 +46,7 @@ def radiation_and_weather(
 def rooftop_pv_power(
     latitude: float, longitude: float, **kwargs
 ) -> PandafiableResponse:
-    """Get basic rooftop PV power forecasts from the present time up to 14 days ahead
+    """Get basic rooftop PV power estimated actuals from the present time up to 14 days ahead
     for the requested location, derived from satellite (clouds and irradiance over
     non-polar continental areas, nowcasted for approx. four hours ahead) and numerical
     weather models (other data and longer horizons).
@@ -71,7 +71,7 @@ def rooftop_pv_power(
 
 def advanced_pv_power(resource_id: int, **kwargs) -> PandafiableResponse:
     """
-    Get high spec PV power forecasts from the present time up to 14 days ahead for
+    Get high spec PV power estimated actuals from the present time up to 14 days ahead for
     the requested site, derived from satellite (clouds and irradiance
     over non-polar continental areas, nowcasted for approx. four hours ahead)
     and numerical weather models (other data and longer horizons).
