@@ -1,4 +1,4 @@
-__version__ = "1.2.5"
+__version__ = "1.2.6"
 
 from . import (
     api,
@@ -6,12 +6,14 @@ from . import (
     historic,
     live,
     tmy,
+    aggregations,
     unmetered_locations,
     urls,
     pv_power_sites,
 )
 
 __all__ = [
+    "aggregations",
     "forecast",
     "historic",
     "live",

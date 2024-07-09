@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.6] - 2024-07-09
+
+- Add the `aggregations` module. No tests as we are yet to expose unmetered aggregations. 
+
+
 ## [1.2.5] - 2024-07-05
 
 - Add advanced_pv_power to the historic module
