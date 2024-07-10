@@ -12,7 +12,7 @@ def live(
     collection_id: str, aggregation_id: Optional[str], **kwargs
 ) -> PandafiableResponse:
     """
-    Get live aggregation data for up to 7 days of data at a time for a requested collection or aggregation
+    Get live aggregation data for up to 7 days of data at a time for a requested collection or aggregation.
 
     Args:
         collection_id: a unique identifier for your collection.

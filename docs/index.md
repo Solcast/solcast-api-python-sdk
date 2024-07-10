@@ -66,13 +66,14 @@ df = res.to_dict()
 
 Available modules are 
 
-| Module       | API Docs                        |
-|--------------|---------------------------------|
-| `live`       | [solcast.live](live.md)           |
-| `historic` | [solcast.historic](historic.md) |
-| `forecast`   | [solcast.forecast](forecast.md)   |
-| `tmy`        | [solcast.tmy](tmy.md)             |
+| Module           | API Docs                                 |
+|------------------|------------------------------------------|
+| `live`           | [solcast.live](live.md)                  |
+| `historic`       | [solcast.historic](historic.md)          |
+| `forecast`       | [solcast.forecast](forecast.md)          |
+| `tmy`            | [solcast.tmy](tmy.md)                    |
 | `pv_power_sites` | [solcast.pv_power_sites](pv_power_sites) |
+| `aggregations`   | [solcast.aggregations](aggregations)     |
 
 
 ## Docs
