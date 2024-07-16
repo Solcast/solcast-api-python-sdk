@@ -17,17 +17,21 @@ nav:
   - PV Power Sites: pv_power_sites.md
   - Aggregations: aggregations.md
   - Example Notebooks:
-      - '1.1 Getting Data: Historic Solar Radiation': 'notebooks/1.1 Getting Data - Historic Solar Radiation.ipynb'
-      - '1.2 Getting Data: TMY in your local timezone': 'notebooks/1.2 Getting Data - TMY in your local timezone.ipynb'
-      - '1.3 Getting Data: Make Concurrent Requests': 'notebooks/1.3 Getting Data - Make Concurrent Requests.ipynb'
-      - '2.1 PVLib: ModelChain with Solcast weather data': 'notebooks/2.1 PVLib - ModelChain with Solcast weather data.ipynb'
-      - '3.1 Comparing to Measurements: Timezone and Time Period alignment': 'notebooks/3.1 Comparing to Measurements - Timezone and Time Period alignment.ipynb'
-      - '3.2 Comparing to Measurements [GHI]: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2 Comparing to Measurements [GHI] - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
-      - '3.2b Comparing to Measurements [GTI]: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2b Comparing to Measurements [GTI] - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
-      - '3.3 Comparing to Measurements: Accuracy Metrics': 'notebooks/3.3 Comparing to Measurements - Accuracy Metrics.ipynb'
-      - '3.4 Rooftop PV Tuning': 'notebooks/3.4 Rooftop PV Tuning.ipynb'
-      - '3.4b Rooftop Shading Corrections': 'notebooks/3.4b Rooftop Shading Corrections.ipynb'
-      - '4.1 Advanced PV Power: Setting up and Using PV Sites': 'notebooks/4.1 Setting up and Using PV Sites.ipynb'
+      - '1. Getting Data':
+        - '1.1 Getting Data: Historic Solar Radiation': 'notebooks/1.1 Getting Data - Historic Solar Radiation.ipynb'
+        - '1.2 Getting Data: TMY in your local timezone': 'notebooks/1.2 Getting Data - TMY in your local timezone.ipynb'
+        - '1.3 Getting Data: Make Concurrent Requests': 'notebooks/1.3 Getting Data - Make Concurrent Requests.ipynb'
+      - '2. PVLib': 
+        - '2.1 PVLib: ModelChain with Solcast weather data': 'notebooks/2.1 PVLib - ModelChain with Solcast weather data.ipynb'
+      - '3. Comparing to Measurements':
+        - '3.1 Comparing to Measurements: Timezone and Time Period alignment': 'notebooks/3.1 Comparing to Measurements - Timezone and Time Period alignment.ipynb'
+        - '3.2 Comparing to Measurements [GHI]: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2 Comparing to Measurements [GHI] - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
+        - '3.2b Comparing to Measurements [GTI]: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2b Comparing to Measurements [GTI] - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
+        - '3.3 Comparing to Measurements: Accuracy Metrics': 'notebooks/3.3 Comparing to Measurements - Accuracy Metrics.ipynb'
+        - '3.4 Rooftop PV Tuning': 'notebooks/3.4 Rooftop PV Tuning.ipynb'
+        - '3.4b Rooftop Shading Corrections': 'notebooks/3.4b Rooftop Shading Corrections.ipynb'
+      - '4. Advanced PV Power':
+        - '4.1 Advanced PV Power: Setting up and Using PV Sites': 'notebooks/4.1 Setting up and Using PV Sites.ipynb'
       - data:
         - '3.1_sample_measurements.csv': 'notebooks/data/3.1_sample_measurements.csv'
         - '3.2_sample_measurements.csv': 'notebooks/data/3.2_sample_measurements.csv'
