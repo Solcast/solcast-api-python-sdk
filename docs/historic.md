@@ -59,7 +59,7 @@ for start_day in start_dates:
     except Exception as e:
         print(f"Request failed for start date {start_day}: {e}")
     
-    # Delay between requests to avoid hitting the rate limit
+    # Delay between requests to avoid hitting the default historic rate limit
     time.sleep(1) 
 
 data = pd.concat(data)
