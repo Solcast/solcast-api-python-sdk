@@ -54,7 +54,7 @@ for start_day in start_dates:
     end_day = (start_day + pd.offsets.MonthEnd(1)).strftime('%Y-%m-%dT23:59:59.000Z')
     
     try:
-        res = historic.radiation_and_weather(latitude=sydney['latitude'], longitude=sydney['longitude'], start=start_date, end=end_day, api_key='uMi7UbjPcewD0fnOgrf2Q9R3AMBkd-D-')
+        res = historic.radiation_and_weather(latitude=sydney['latitude'], longitude=sydney['longitude'], start=start_date, end=end_day)
         data.append(res.to_pandas())
     except res.exceptions.RequestException as e:
         print(f"Request failed for start date {start_date}: {e}")
