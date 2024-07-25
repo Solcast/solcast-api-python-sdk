@@ -10,7 +10,7 @@ The `Historic` module has 3 methods:
 | `rooftop_pv_power`      | [list of API parameters](https://docs.solcast.com.au/#504e6e52-992f-4ac2-a4dc-d7ab312f992a){.md-button}                |
 | `advanced_pv_power`     | [list of API parameters](https://docs.solcast.com.au/#1db1132e-8d49-4f25-939f-34883e5336c4){.md-button}               |
 
-### Example
+## Example of single-period request
 
 ```python
 from solcast import historic
@@ -34,31 +34,34 @@ res.to_pandas().head()
 | 2022-06-01 08:30:00+00:00 |         12 |     0 |     0 |
 
 
-## Example of multi period request for the year of 2023 from Jan 01
-### The below code is using an unmetered location. If using a metered location, it will consume 12 request.
+## Example of 12 month combined multi-period requests
+The below code is using an unmetered location. If using a metered location, it will consume 12 request.
+For more information see the [API Docs](https://solcast.github.io/solcast-api-python-sdk/notebooks/1.3%20Getting%20Data%20-%20Make%20Concurrent%20Requests/). 
 
 ```python
 from solcast import historic
 import pandas as pd
+import time
 from solcast.unmetered_locations import UNMETERED_LOCATIONS
 from solcast import historic
 
-site = UNMETERED_LOCATIONS["Stonehenge"]
-latitude, longitude = site["latitude"], site["longitude"]
-
+sydney = UNMETERED_LOCATIONS['Sydney Opera House']
 data = []
 start_date = '2023-01-01'
 start_dates = pd.date_range(start=start_date, periods=12, freq='MS')
 
-for start in start_dates:
-    start_str = start.strftime('%Y-%m-%dT00:00:00.000Z')
-    end_date =  (start + pd.offsets.MonthEnd(1)).strftime('%Y-%m-%dT23:59:59.000Z')
+for start_day in start_dates:
+    end_day = (start_day + pd.offsets.MonthEnd(1)).strftime('%Y-%m-%dT23:59:59.000Z')
     
-    res = historic.radiation_and_weather(latitude=latitude, longitude=longitude, start=start_str, end=end_date)
-    if res.success:
+    try:
+        res = historic.radiation_and_weather(latitude=sydney['latitude'], longitude=sydney['longitude'], start=start_date, end=end_day, api_key='uMi7UbjPcewD0fnOgrf2Q9R3AMBkd-D-')
         data.append(res.to_pandas())
-    else:
-        print(res.exception)
+    except res.exceptions.RequestException as e:
+        print(f"Request failed for start date {start_date}: {e}")
+    
+    # Delay between requests to avoid hitting the rate limit
+    time.sleep(1) 
 
-output = pd.concat(data)
+data = pd.concat(data)
+data
 ```
