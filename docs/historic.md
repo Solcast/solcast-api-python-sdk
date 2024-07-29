@@ -39,9 +39,9 @@ The below code is using an unmetered location. If using a metered location, it w
 For more information see the [API Docs](https://solcast.github.io/solcast-api-python-sdk/notebooks/1.3%20Getting%20Data%20-%20Make%20Concurrent%20Requests/). 
 
 ```python
-from solcast import historic
-import pandas as pd
 import time
+import pandas as pd
+from solcast import historic
 from solcast.unmetered_locations import UNMETERED_LOCATIONS
 from solcast import historic
 
@@ -54,7 +54,12 @@ for start_day in start_dates:
     end_day = (start_day + pd.offsets.MonthEnd(1)).strftime('%Y-%m-%dT23:59:59.000Z')
     
     try:
-        res = historic.radiation_and_weather(latitude=sydney['latitude'], longitude=sydney['longitude'], start=start_day, end=end_day)
+        res = historic.radiation_and_weather(
+            latitude=sydney['latitude'],
+            longitude=sydney['longitude'],
+            start=start_day,
+            end=end_day,
+        )
         data.append(res.to_pandas())
     except Exception as e:
         print(f"Request failed for start date {start_day}: {e}")
