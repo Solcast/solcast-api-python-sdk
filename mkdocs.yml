@@ -23,6 +23,7 @@ nav:
         - '1.3 Getting Data: Make Concurrent Requests': 'notebooks/1.3 Getting Data - Make Concurrent Requests.ipynb'
       - '2. PVLib': 
         - '2.1 PVLib: ModelChain with Solcast weather data': 'notebooks/2.1 PVLib - ModelChain with Solcast weather data.ipynb'
+        - '2.2 PVLib - Using pvlib.iotools helper functions to get Solcast Data.ipynb': "notebooks/2.2 PVLib - Using pvlib.iotools helper functions to get Solcast Data.ipynb"
       - '3. Comparing to Measurements':
         - '3.1 Comparing to Measurements: Timezone and Time Period alignment': 'notebooks/3.1 Comparing to Measurements - Timezone and Time Period alignment.ipynb'
         - '3.2 Comparing to Measurements [GHI]: Quality Controlling and Gap Filling Measurements with Solcast Actuals': 'notebooks/3.2 Comparing to Measurements [GHI] - Quality Controlling and Gap Filling Measurements with Solcast Actuals.ipynb'
