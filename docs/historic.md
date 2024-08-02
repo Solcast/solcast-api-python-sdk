@@ -34,7 +34,7 @@ res.to_pandas().head()
 | 2022-06-01 08:30:00+00:00 |         12 |     0 |     0 |
 
 
-## Example of 12 month combined multi-period requests
+## Example of 12 month combined multi-period requests.
 The below code is using an unmetered location. If using a metered location, it will consume 12 request.
 For more information see the [API Docs](https://solcast.github.io/solcast-api-python-sdk/notebooks/1.3%20Getting%20Data%20-%20Make%20Concurrent%20Requests/). 
 
@@ -43,7 +43,6 @@ import time
 import pandas as pd
 from solcast import historic
 from solcast.unmetered_locations import UNMETERED_LOCATIONS
-from solcast import historic
 
 sydney = UNMETERED_LOCATIONS['Sydney Opera House']
 data = []
@@ -70,3 +69,17 @@ for start_day in start_dates:
 data = pd.concat(data)
 data
 ```
+
+| period_end                |   air_temp |   dni |   ghi |
+|:--------------------------|-----------:|------:|------:|
+| 2023-01-01 00:30:00+00:00 |         22 |   819 |   917 |
+| 2023-01-01 01:00:00+00:00 |         23 |   924 |   996 |
+| 2023-01-01 01:30:00+00:00 |         23 |   935 |  1028 |
+| 2023-01-01 02:00:00+00:00 |         23 |   761 |   977 |
+| 2023-01-01 02:30:00+00:00 |         23 |   702 |   953 |
+...                             ...  ...   ...
+| 2023-12-31 22:00:00+00:00 |         21 |   329 |   435 |
+| 2023-12-31 22:30:00+00:00 |         21 |     0 |   273 |
+| 2023-12-31 23:00:00+00:00 |         21 |     0 |   330 |
+| 2023-12-31 23:30:00+00:00 |         22 |     0 |   349 |
+| 2024-01-01 00:00:00+00:00 |         22 |     0 |   324 |
