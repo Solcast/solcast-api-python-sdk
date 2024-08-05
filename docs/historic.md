@@ -34,8 +34,8 @@ res.to_pandas().head()
 | 2022-06-01 08:30:00+00:00 |         12 |     0 |     0 |
 
 
-## Example of 12 month combined multi-period requests.
-The below code is using an unmetered location. If using a metered location, it will consume 12 request.
+## Example of 12 month combined multi-period requests
+The below code is using an unmetered location. If using a metered location, it will consume 12 requests.
 For more information see the [API Docs](https://solcast.github.io/solcast-api-python-sdk/notebooks/1.3%20Getting%20Data%20-%20Make%20Concurrent%20Requests/). 
 
 ```python
