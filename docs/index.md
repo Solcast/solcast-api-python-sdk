@@ -72,8 +72,8 @@ Available modules are
 | `historic`       | [solcast.historic](historic.md)          |
 | `forecast`       | [solcast.forecast](forecast.md)          |
 | `tmy`            | [solcast.tmy](tmy.md)                    |
-| `pv_power_sites` | [solcast.pv_power_sites](pv_power_sites) |
-| `aggregations`   | [solcast.aggregations](aggregations)     |
+| `pv_power_sites` | [solcast.pv_power_sites](pv_power_sites.md) |
+| `aggregations`   | [solcast.aggregations](aggregations.md)     |
 
 
 ## Docs
