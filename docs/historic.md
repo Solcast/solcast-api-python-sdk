@@ -10,7 +10,7 @@ The `Historic` module has 3 methods:
 | `rooftop_pv_power`      | [list of API parameters](https://docs.solcast.com.au/#504e6e52-992f-4ac2-a4dc-d7ab312f992a){.md-button}                |
 | `advanced_pv_power`     | [list of API parameters](https://docs.solcast.com.au/#1db1132e-8d49-4f25-939f-34883e5336c4){.md-button}               |
 
-### Example
+## Example of single-period request
 
 ```python
 from solcast import historic
@@ -34,31 +34,52 @@ res.to_pandas().head()
 | 2022-06-01 08:30:00+00:00 |         12 |     0 |     0 |
 
 
-## Example of multi period request for the year of 2023 from Jan 01
-### The below code is using an unmetered location. If using a metered location, it will consume 12 request.
+## Example of 12 month combined multi-period requests
+The below code is using an unmetered location. If using a metered location, it will consume 12 requests.
+For more information see the [API Docs](https://solcast.github.io/solcast-api-python-sdk/notebooks/1.3%20Getting%20Data%20-%20Make%20Concurrent%20Requests/). 
 
 ```python
-from solcast import historic
+import time
 import pandas as pd
-from solcast.unmetered_locations import UNMETERED_LOCATIONS
 from solcast import historic
+from solcast.unmetered_locations import UNMETERED_LOCATIONS
 
-site = UNMETERED_LOCATIONS["Stonehenge"]
-latitude, longitude = site["latitude"], site["longitude"]
-
+sydney = UNMETERED_LOCATIONS['Sydney Opera House']
 data = []
 start_date = '2023-01-01'
 start_dates = pd.date_range(start=start_date, periods=12, freq='MS')
 
-for start in start_dates:
-    start_str = start.strftime('%Y-%m-%dT00:00:00.000Z')
-    end_date =  (start + pd.offsets.MonthEnd(1)).strftime('%Y-%m-%dT23:59:59.000Z')
+for start_day in start_dates:
+    end_day = (start_day + pd.offsets.MonthEnd(1)).strftime('%Y-%m-%dT23:59:59.000Z')
     
-    res = historic.radiation_and_weather(latitude=latitude, longitude=longitude, start=start_str, end=end_date)
-    if res.success:
+    try:
+        res = historic.radiation_and_weather(
+            latitude=sydney['latitude'],
+            longitude=sydney['longitude'],
+            start=start_day,
+            end=end_day,
+        )
         data.append(res.to_pandas())
-    else:
-        print(res.exception)
+    except Exception as e:
+        print(f"Request failed for start date {start_day}: {e}")
+    
+    # Delay between requests to avoid hitting the default historic rate limit
+    time.sleep(1) 
 
-output = pd.concat(data)
+data = pd.concat(data)
+data
 ```
+
+| period_end                |   air_temp |   dni |   ghi |
+|:--------------------------|-----------:|------:|------:|
+| 2023-01-01 00:30:00+00:00 |         22 |   819 |   917 |
+| 2023-01-01 01:00:00+00:00 |         23 |   924 |   996 |
+| 2023-01-01 01:30:00+00:00 |         23 |   935 |  1028 |
+| 2023-01-01 02:00:00+00:00 |         23 |   761 |   977 |
+| 2023-01-01 02:30:00+00:00 |         23 |   702 |   953 |
+...                             ...  ...   ...
+| 2023-12-31 22:00:00+00:00 |         21 |   329 |   435 |
+| 2023-12-31 22:30:00+00:00 |         21 |     0 |   273 |
+| 2023-12-31 23:00:00+00:00 |         21 |     0 |   330 |
+| 2023-12-31 23:30:00+00:00 |         22 |     0 |   349 |
+| 2024-01-01 00:00:00+00:00 |         22 |     0 |   324 |
