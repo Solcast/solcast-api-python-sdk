@@ -188,7 +188,7 @@ def soiling_kimber(
         duration is None and end is not None
     ), "only one of duration or end"
 
-    url = kwargs.get("base_url", base_url)
+    url = kwargs.pop("base_url", base_url)
     client = Client(
         base_url=url,
         endpoint=historic_soiling_kimber,
@@ -242,7 +242,7 @@ def soiling_hsu(
         duration is None and end is not None
     ), "only one of duration or end"
 
-    url = kwargs.get("base_url", base_url)
+    url = kwargs.pop("base_url", base_url)
     client = Client(
         base_url=url,
         endpoint=historic_soiling_hsu,

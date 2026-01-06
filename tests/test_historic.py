@@ -1,5 +1,4 @@
 import pandas as pd
-import pytest
 
 from solcast import historic
 from solcast.unmetered_locations import (

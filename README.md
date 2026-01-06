@@ -24,23 +24,33 @@ cd solcast-api-python-sdk
 pip install .
 ```
 
-The vanilla version doesn't have any dependency. For full functionality,
-for example for getting the data into `DataFrames`, and for development, use the `[all]` tag:
+The base solcast sdk install requires only the python standard library.
+Pandas is the only optional dependency that adds functionality to the package.
 
 ```commandline
-pip install .[all] for the dev libs
+pip install solcast pandas
 ```
+
+The example notebooks use a variety of optional dependencies to showcase different
+ways in which the Solcast API may be used. To install these dependencies run
+
+```commandline
+pip install solcast[all]
+```
+
 
 ## Basic Usage
 
 ```python
 from solcast import live
 
-df = live.radiation_and_weather(
+res = live.radiation_and_weather(
     latitude=-33.856784,
     longitude=151.215297,
     output_parameters=['air_temp', 'dni', 'ghi']
-).to_pandas()
+)
+res.to_dict()
+res.to_pandas()  # requires optional pandas installation
 ```
 
 Don't forget to set your [account Api Key](https://toolkit.solcast.com.au/register) with:
@@ -56,6 +66,15 @@ They are executed on `unmetered locations` and as such won't consume your reques
 ```commandline
 pytest tests
 ```
+
+## Docs
+
+From the directory run
+```bash
+mkdocs build
+mkdocs serve
+```
+In a browser navigate to `localhost:8000` to see the documentation.
 
 ### Formatters and Linters
 

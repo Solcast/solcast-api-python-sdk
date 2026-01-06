@@ -19,15 +19,17 @@ classifiers = [
   "Topic :: Software Development",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
-  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
   "License :: OSI Approved :: Apache Software License",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
 
 dynamic = ["version"]
@@ -38,7 +40,18 @@ Documentation = "https://solcast.github.io/solcast-api-python-sdk"
 Repository = "https://github.com/Solcast/solcast-api-python-sdk"
 
 [project.optional-dependencies]
-all = ["notebook", "matplotlib", "pandas"]
+all = [
+  "pandas",
+  "notebook",
+  "numpy",
+  "matplotlib",
+  "plotly",
+  "kaleido",
+  "folium",
+  "pvlib",
+  "pvanalytics",
+  "scipy"
+]
 
 [tool.hatch.version]
 path = "solcast/__init__.py"
@@ -63,4 +76,4 @@ docs = [
   "mkdocstrings[python]==0.26.1",
 ]
 lint = ["black>=24.8.0", "isort>=5.13.2"]
-test = ["pytest>=8.3.5"]
+test = ["pytest>=8.3.5", "pandas"]

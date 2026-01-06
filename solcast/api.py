@@ -12,7 +12,20 @@ import solcast
 
 @dataclass
 class Response:
-    """Class to handle API response from the Solcast API."""
+    """Class to handle any API response from the Solcast API.
+
+    Attributes:
+        code: HTTP status code of the response
+        url: The URL that was requested
+        data: Raw response data as bytes
+        success: Whether the request was successful
+        method: HTTP method used (GET, POST, etc.)
+        exception: Exception message if request failed
+
+    Examples:
+        >>> response = Response(code=200, url="...", data=b"...", success=True, method="GET")
+        >>> response.to_dict()
+    """
 
     code: int
     url: str
@@ -25,6 +38,7 @@ class Response:
         return f"status code={self.code}, url={self.url}, method={self.method}"
 
     def to_dict(self):
+        """Return the data as a dictionary."""
         if self.code not in [200, 204]:
             raise Exception(self.exception)
         if self.code == 204:
@@ -36,13 +50,23 @@ class Response:
 
 
 class PandafiableResponse(Response):
-    """Class to handle API response from the Solcast API, with pandas integration."""
+    """Class to handle API response from the Solcast API for timeseries data.
+
+    Attributes:
+        code: HTTP status code of the response
+        url: The URL that was requested
+        data: Raw response data as bytes
+        success: Whether the request was successful
+        method: HTTP method used (GET, POST, etc.)
+        exception: Exception message if request failed
+
+    Examples:
+        >>> response = Response(code=200, url="...", data=b"...", success=True, method="GET")
+        >>> response.to_pandas()
+    """
 
     def to_pandas(self):
-        """returns the data as a Pandas DataFrame.
-        Some common processing is applied,
-        like casting the datetime columns and setting them as index.
-        """
+        """Return the data as a Pandas DataFrame with a DatetimeIndex."""
         # not ideal to run this for every Response
 
         try:

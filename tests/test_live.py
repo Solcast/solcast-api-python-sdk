@@ -1,4 +1,5 @@
 import pandas as pd
+
 from solcast import live
 from solcast.unmetered_locations import (
     UNMETERED_LOCATIONS,

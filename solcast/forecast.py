@@ -121,7 +121,7 @@ def soiling_kimber(
 
     See https://docs.solcast.com.au/ for full parameter details.
     """
-    url = kwargs.get("base_url", base_url)
+    url = kwargs.pop("base_url", base_url)
 
     client = Client(
         base_url=url,
@@ -158,7 +158,7 @@ def soiling_hsu(
 
     See https://docs.solcast.com.au/ for full parameter details.
     """
-    url = kwargs.get("base_url", base_url)
+    url = kwargs.pop("base_url", base_url)
     client = Client(
         base_url=url,
         endpoint=forecast_soiling_hsu,
