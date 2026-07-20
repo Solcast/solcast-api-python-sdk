@@ -1,5 +1,11 @@
 # Changelog
 
+
+## [1.3.2] - 2026-07-20
+
+- Update 3.4 Rooftop PV Tuning notebook with more robust handling of azimuth and tilt values.
+
+
 ## [1.3.1] - 2025-11-19
 
 - Add the `Kimber` and `HSU` to live, forecast, and historic module
