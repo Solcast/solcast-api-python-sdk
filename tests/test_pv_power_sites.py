@@ -7,8 +7,11 @@ def test_list_pv_power_sites():
     res = pv_power_sites.list_pv_power_sites()
 
     assert res.success
-    assert isinstance(res.to_dict(), list)
-    assert all(["resource_id" in resource for resource in res.to_dict()])
+    assert (
+        len({"offset", "total", "results"}.symmetric_difference(res.to_dict().keys()))
+        == 0
+    )
+    assert all(["resource_id" in resource for resource in res.to_dict()["results"]])
     with pytest.raises(
         AttributeError, match="'Response' object has no attribute 'to_pandas'"
     ):
