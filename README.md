@@ -38,6 +38,7 @@ ways in which the Solcast API may be used. To install these dependencies run
 pip install solcast[all]
 ```
 
+N.B. Installs for `[all]` using Python 3.8 and Windows will not work due to an [issue with pywinpty](https://github.com/andfoy/pywinpty/issues/486)
 
 ## Basic Usage
 
