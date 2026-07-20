@@ -7,7 +7,12 @@ jobs:
     strategy:
       matrix:
         os: ["ubuntu-latest", "macos-14", "windows-latest"]
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+        exclude:
+          # pywinpty dropped Python 3.8 support in 2.0.15 (and dropped 3.8 wheels in 2.0.14),
+          # so the `all` extra deliberately fails to resolve on Windows with Python 3.8.
+          - os: "windows-latest"
+            python-version: "3.8"
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -26,3 +31,26 @@ jobs:
           SOLCAST_API_KEY: ${{ secrets.SOLCAST_API_KEY }}
         run: |
           uv run --python ${{ matrix.python-version }} --group test pytest tests
+
+  windows-py38-core:
+    # pywinpty dropped Python 3.8 support in 2.0.15 (and dropped 3.8 wheels in 2.0.14), so the
+    # `all` extra can't be installed on Windows with Python 3.8 (see build job's exclude above).
+    # This job covers Windows + Python 3.8 for the core package only, without the `all` extra.
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install dependencies with uv
+        run: |
+          uv python install 3.8
+          uv sync --python 3.8 --group test
+
+      - name: Test with pytest
+        env:
+          SOLCAST_API_KEY: ${{ secrets.SOLCAST_API_KEY }}
+        run: |
+          uv run --python 3.8 --group test pytest tests

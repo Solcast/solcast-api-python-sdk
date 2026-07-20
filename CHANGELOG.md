@@ -1,10 +1,11 @@
 # Changelog
 
 
-## [1.3.2] - 2026-07-20
+## [1.4.0] - 2026-07-20
 
+- Remove support for `solcast[all]` for Python 3.8 on Windows due to https://github.com/andfoy/pywinpty/issues/486. 
+Note: Plain `solcast` works as it has only uses python built-in packages.
 - Update 3.4 Rooftop PV Tuning notebook with more robust handling of azimuth and tilt values.
-
 
 ## [1.3.1] - 2025-11-19
 
