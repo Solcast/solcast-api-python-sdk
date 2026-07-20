@@ -31,4 +31,4 @@ jobs:
         env:
           SOLCAST_API_KEY: ${{ secrets.SOLCAST_API_KEY }}
         run: |
-          uv run --python ${{ matrix.python-version }} --group test pytest tests
+          uv run --python ${{ matrix.python-version }} --group test pytest -v tests
