@@ -8,12 +8,14 @@ def live(
     collection_id: str, aggregation_id: Optional[str], **kwargs
 ) -> PandafiableResponse:
     """
-    Get live aggregation data for up to 7 days of data at a time for a requested collection or aggregation.
+    Get live aggregation data for up to 7 days of data at a time for a requested
+    collection or aggregation.
 
     Args:
         collection_id: a unique identifier for your collection.
         aggregation_id: a unique identifier that belongs to the requested collection.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to
+            the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -37,12 +39,14 @@ def forecast(
     collection_id: str, aggregation_id: Optional[str], **kwargs
 ) -> PandafiableResponse:
     """
-    Get forecast aggregation data for up to 7 days of data at a time for a requested collection or aggregation.
+    Get forecast aggregation data for up to 14 days of data at a time for a requested
+    collection or aggregation.
 
     Args:
         collection_id: a unique identifier for your collection.
         aggregation_id: a unique identifier that belongs to the requested collection.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to
+            the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
