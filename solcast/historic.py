@@ -40,20 +40,19 @@ def radiation_and_weather(
             assumed.
         duration: Must include one of end_date and duration. ISO_8601 compliant duration
             for the historical data. Must be within 31 days of the start_date.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
+    assert (end is None and duration is not None) | (
+        duration is None and end is not None
+    ), "only one of duration or end"
+
     client = Client(
         base_url=base_url,
         endpoint=historic_radiation_and_weather,
         response_type=PandafiableResponse,
     )
-
-    assert (end is None and duration is not None) | (
-        duration is None and end is not None
-    ), "only one of duration or end"
 
     params = {
         "latitude": latitude,
@@ -100,20 +99,19 @@ def rooftop_pv_power(
             assumed.
         duration: Must include one of end_date and duration. ISO_8601 compliant duration
             for the historical data. Must be within 31 days of the start_date.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
+    assert (end is None and duration is not None) | (
+        duration is None and end is not None
+    ), "only one of duration or end"
+
     client = Client(
         base_url=base_url,
         endpoint=historic_rooftop_pv_power,
         response_type=PandafiableResponse,
     )
-
-    assert (end is None and duration is not None) | (
-        duration is None and end is not None
-    ), "only one of duration or end"
 
     params = {
         "latitude": latitude,
@@ -156,20 +154,19 @@ def advanced_pv_power(
             assumed.
         duration: Must include one of end_date and duration. ISO_8601 compliant duration
             for the historical data. Must be within 31 days of the start_date.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
+    assert (end is None and duration is not None) | (
+        duration is None and end is not None
+    ), "only one of duration or end"
+
     client = Client(
         base_url=base_url,
         endpoint=historic_advanced_pv_power,
         response_type=PandafiableResponse,
     )
-
-    assert (end is None and duration is not None) | (
-        duration is None and end is not None
-    ), "only one of duration or end"
 
     params = {
         "resource_id": resource_id,
@@ -214,14 +211,17 @@ def soiling_kimber(
         duration: ISO_8601 compliant duration for the historical data. Must be within 31
             days of the start_date. Only one of end or duration should be part of the
             request.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     Returns:
         PandafiableResponse: Response object; call `.to_pandas()` for a DataFrame.
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
+    assert (end is None and duration is not None) | (
+        duration is None and end is not None
+    ), "only one of duration or end"
+
     url = kwargs.pop("base_url", base_url)
 
     client = Client(
@@ -229,10 +229,6 @@ def soiling_kimber(
         endpoint=historic_soiling_kimber,
         response_type=PandafiableResponse,
     )
-
-    assert (end is None and duration is not None) | (
-        duration is None and end is not None
-    ), "only one of duration or end"
 
     params = {
         "latitude": latitude,
@@ -279,14 +275,17 @@ def soiling_hsu(
         duration: ISO_8601 compliant duration for the historical data. Must be within 31
             days of the start_date. Only one of end or duration should be part of the
             request.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     Returns:
         PandafiableResponse: Response object; call `.to_pandas()` for a DataFrame.
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
+    assert (end is None and duration is not None) | (
+        duration is None and end is not None
+    ), "only one of duration or end"
+
     url = kwargs.pop("base_url", base_url)
 
     client = Client(
@@ -294,10 +293,6 @@ def soiling_hsu(
         endpoint=historic_soiling_hsu,
         response_type=PandafiableResponse,
     )
-
-    assert (end is None and duration is not None) | (
-        duration is None and end is not None
-    ), "only one of duration or end"
 
     params = {
         "latitude": latitude,

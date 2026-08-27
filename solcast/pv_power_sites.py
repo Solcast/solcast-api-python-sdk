@@ -9,8 +9,7 @@ def list_pv_power_sites(**kwargs) -> Response:
     (start/end).
 
     Args:
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -25,8 +24,7 @@ def get_pv_power_site(resource_id: str, **kwargs) -> Response:
 
     Args:
         resource_id: The unique identifier of the resource.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -45,11 +43,12 @@ def create_pv_power_site(
     Create Resource
 
     Args:
-        name:
-        latitude:
-        longitude:
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        name: The name of the resource.
+        latitude: The latitude of the resource. Must be a decimal number between -90 and
+            90.
+        longitude: The longitude of the resource. Must be a decimal number between -180
+            and 180.
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -71,9 +70,8 @@ def patch_pv_power_site(resource_id: str, **kwargs) -> Response:
     Patch Resource
 
     Args:
-        resource_id:
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        resource_id: The unique identifier of the resource.
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -87,9 +85,8 @@ def update_pv_power_site(resource_id: str, **kwargs) -> Response:
     Update Resource
 
     Args:
-        resource_id:
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        resource_id: The unique identifier of the resource.
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -104,8 +101,7 @@ def delete_pv_power_site(resource_id: str, **kwargs) -> Response:
 
     Args:
         resource_id: The unique identifier of the resource.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """

@@ -16,8 +16,7 @@ def radiation_and_weather(
             number between -90 and 90.
         longitude: The longitude of the location you request data for. Must be a decimal
             number between -180 and 180.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -51,8 +50,7 @@ def rooftop_pv_power(
             number between -90 and 90.
         longitude: The longitude of the location you request data for. Must be a decimal
             number between -180 and 180.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """

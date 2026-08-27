@@ -25,8 +25,7 @@ def radiation_and_weather(
         longitude: The longitude of the location you request data for. Must be a decimal
             number between -180 and 180.
         output_parameters: The output parameters to include in the response.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -63,8 +62,7 @@ def rooftop_pv_power(
             number between -90 and 90.
         longitude: The longitude of the location you request data for. Must be a decimal
             number between -180 and 180.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -92,8 +90,7 @@ def advanced_pv_power(resource_id: int, **kwargs) -> PandafiableResponse:
 
     Args:
         resource_id: The resource id of the resource.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
@@ -120,8 +117,7 @@ def soiling_hsu(
             number between -90 and 90.
         longitude: The longitude of the location you request data for. Must be a decimal
             number between -180 and 180.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     Returns:
         PandafiableResponse: Response object; call `.to_pandas()` for a DataFrame.
@@ -160,8 +156,7 @@ def soiling_kimber(
         latitude: The latitude of the location (EPSG:4326). Must be between -90 and 90.
         longitude: The longitude of the location (EPSG:4326). Must be between -180 and
             180.
-        **kwargs: additional keyword arguments to be passed through as URL parameters to
-            the Solcast API
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     Returns:
         PandafiableResponse: Response object; call `.to_pandas()` for a DataFrame.
