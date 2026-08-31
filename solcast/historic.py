@@ -20,27 +20,38 @@ def radiation_and_weather(
     **kwargs,
 ) -> PandafiableResponse:
     """
-    Get historical irradiance and weather estimated actuals for up to 31 days of data
-    at a time for a requested location, derived from satellite (clouds and irradiance
-    over non-polar continental areas) and numerical weather models (other data).
-    Data is available from 2007-01-01T00:00Z up to real time estimated actuals.
+    Get historical irradiance and weather estimated actuals for up to 31 days of data at
+    a time for a requested location, derived from satellite (clouds and irradiance over
+    non-polar continental areas) and numerical weather models (other data). Data is
+    available from 2007-01-01T00:00Z to 7 days ago.
 
     Args:
-        latitude: in decimal degrees, between -90 and 90, north is positive
-        longitude: in decimal degrees, between -180 and 180, east is positive
-        start: datetime-like, first day of the requested period
-        end: optional, datetime-like, last day of the requested period
-        duration: optional, ISO_8601 compliant duration for the historic data.
-            Must be within 31 days of the start_date.
+        latitude: The latitude of the location you request data for. Must be a decimal
+            number between -90 and 90.
+        longitude: The longitude of the location you request data for. Must be a decimal
+            number between -180 and 180.
+        start: ISO_8601 compliant starting datetime for the historical data. If the
+            supplied value does not specify a timezone, the timezone will be inferred
+            from the time_zone parameter, if supplied. Otherwise UTC is assumed.
+        end: Must include one of end_date and duration. ISO_8601 compliant ending
+            datetime for the historical data. Must be within 31 days of the start_date.
+            If the supplied value does not specify a timezone, the timezone will be
+            inferred from the time_zone parameter, if supplied. Otherwise UTC is
+            assumed.
+        duration: Must include one of end_date and duration. ISO_8601 compliant duration
+            for the historical data. Must be within 31 days of the start_date.
         **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
+    assert (end is None and duration is not None) | (
+        duration is None and end is not None
+    ), "only one of duration or end"
 
     client = Client(
         base_url=base_url,
         endpoint=historic_radiation_and_weather,
-        response_type=PandafiableResponse,  # type: ignore[arg-type]
+        response_type=PandafiableResponse,
     )
 
     params = {
@@ -69,30 +80,38 @@ def rooftop_pv_power(
 ) -> PandafiableResponse:
     """
     Get historical basic rooftop PV power estimated actuals for the requested location,
-    derived from satellite (clouds and irradiance over non-polar continental areas)
-    and numerical weather models (other data).
+    derived from satellite (clouds and irradiance over non-polar continental areas) and
+    numerical weather models (other data). Data is available from 2007-01-01T00:00Z to 7
+    days ago.
 
     Args:
-        latitude: in decimal degrees, between -90 and 90, north is positive
-        longitude: in decimal degrees, between -180 and 180, east is positive
-        start: datetime-like, first day of the requested period
-        end: optional, datetime-like, last day of the requested period
-        duration: optional, ISO_8601 compliant duration for the historic data.
-            Must be within 31 days of the start_date.
+        latitude: The latitude of the location you request data for. Must be a decimal
+            number between -90 and 90.
+        longitude: The longitude of the location you request data for. Must be a decimal
+            number between -180 and 180.
+        start: ISO_8601 compliant starting datetime for the historical data. If the
+            supplied value does not specify a timezone, the timezone will be inferred
+            from the time_zone parameter, if supplied. Otherwise UTC is assumed.
+        end: Must include one of end_date and duration. ISO_8601 compliant ending
+            datetime for the historical data. Must be within 31 days of the start_date.
+            If the supplied value does not specify a timezone, the timezone will be
+            inferred from the time_zone parameter, if supplied. Otherwise UTC is
+            assumed.
+        duration: Must include one of end_date and duration. ISO_8601 compliant duration
+            for the historical data. Must be within 31 days of the start_date.
         **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
+    assert (end is None and duration is not None) | (
+        duration is None and end is not None
+    ), "only one of duration or end"
 
     client = Client(
         base_url=base_url,
         endpoint=historic_rooftop_pv_power,
-        response_type=PandafiableResponse,  # type: ignore[arg-type]
+        response_type=PandafiableResponse,
     )
-
-    assert (end is None and duration is not None) | (
-        duration is None and end is not None
-    ), "only one of duration or end"
 
     params = {
         "latitude": latitude,
@@ -118,34 +137,40 @@ def advanced_pv_power(
     **kwargs,
 ) -> PandafiableResponse:
     """
-    Get historical high spec PV power estimated actuals for the requested site,
-    derived from satellite (clouds and irradiance over non-polar continental areas)
-    and numerical weather models (other data).
+    Get historical advanced PV power estimated actuals for the requested location,
+    derived from satellite (clouds and irradiance over non-polar continental areas) and
+    numerical weather models (other data). Data is available from 2007-01-01T00:00Z to 7
+    days ago.
 
     Args:
-        resource_id: a Solcast resource id
-        start: datetime-like, first day of the requested period
-        end: optional, datetime-like, last day of the requested period
-        duration: optional, ISO_8601 compliant duration for the historic data.
-            Must be within 31 days of the start_date.
+        resource_id: The resource id of the resource.
+        start: ISO_8601 compliant starting datetime for the historical data. If the
+            supplied value does not specify a timezone, the timezone will be inferred
+            from the time_zone parameter, if supplied. Otherwise UTC is assumed.
+        end: Must include one of end_date and duration. ISO_8601 compliant ending
+            datetime for the historical data. Must be within 31 days of the start_date.
+            If the supplied value does not specify a timezone, the timezone will be
+            inferred from the time_zone parameter, if supplied. Otherwise UTC is
+            assumed.
+        duration: Must include one of end_date and duration. ISO_8601 compliant duration
+            for the historical data. Must be within 31 days of the start_date.
         **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     See https://docs.solcast.com.au/ for full list of parameters.
     """
-    client = Client(
-        base_url=base_url,
-        endpoint=historic_advanced_pv_power,
-        response_type=PandafiableResponse,  # type: ignore[arg-type]
-    )
-
     assert (end is None and duration is not None) | (
         duration is None and end is not None
     ), "only one of duration or end"
 
+    client = Client(
+        base_url=base_url,
+        endpoint=historic_advanced_pv_power,
+        response_type=PandafiableResponse,
+    )
+
     params = {
         "resource_id": resource_id,
         "start": start,
-        "format": "json",
         "format": "json",
         **kwargs,
     }
@@ -166,33 +191,43 @@ def soiling_kimber(
     duration: Optional[str] = None,
     **kwargs,
 ) -> PandafiableResponse:
-    """Get hourly historical soiling loss using the Kimber model.
-
-    Returns a time series of estimated historical cumulative soiling / cleanliness state
-    for the requested location based on Pvlib's Kimber model.
+    """
+    Get historical soiling loss using the Kimber model for up to 31 days of data at a
+    time for a requested location. Data is available from 2007-01-01T00:00Z to 7 days
+    ago.
 
     Args:
-        latitude: Decimal degrees, between -90 and 90 (north positive).
-        longitude: Decimal degrees, between -180 and 180 (east positive).
-        start: Datetime-like (YYYY-MM-DD or ISO8601) start of period.
-        end: Optional, end of requested period (mutually exclusive with duration).
-        duration: Optional, ISO8601 duration within 31 days of start (mutually exclusive with end).
-        **kwargs: Additional query parameters accepted by the endpoint (e.g. depo_veloc_pm10, initial_soiling).
+        latitude: The latitude of the location (EPSG:4326). Must be between -90 and 90.
+        longitude: The longitude of the location (EPSG:4326). Must be between -180 and
+            180.
+        start: ISO_8601 compliant starting datetime for the historical data. If the
+            supplied value does not specify a timezone, the timezone will be inferred
+            from the time_zone parameter, if supplied. Otherwise UTC is assumed.
+        end: ISO_8601 compliant ending datetime for the historical data. Must be within
+            31 days of the start_date. Only one of end or duration should be part of the
+            request. If the supplied value does not specify a timezone, the timezone
+            will be inferred from the time_zone parameter, if supplied. Otherwise UTC is
+            assumed.
+        duration: ISO_8601 compliant duration for the historical data. Must be within 31
+            days of the start_date. Only one of end or duration should be part of the
+            request.
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     Returns:
         PandafiableResponse: Response object; call `.to_pandas()` for a DataFrame.
 
-    See https://docs.solcast.com.au/ for full parameter details.
+    See https://docs.solcast.com.au/ for full list of parameters.
     """
     assert (end is None and duration is not None) | (
         duration is None and end is not None
     ), "only one of duration or end"
 
     url = kwargs.pop("base_url", base_url)
+
     client = Client(
         base_url=url,
         endpoint=historic_soiling_kimber,
-        response_type=PandafiableResponse,  # type: ignore[arg-type]
+        response_type=PandafiableResponse,
     )
 
     params = {
@@ -220,33 +255,43 @@ def soiling_hsu(
     base_url=base_url,
     **kwargs,
 ) -> PandafiableResponse:
-    """Get hourly historical soiling loss using the HSU model.
-
-    Returns a time series of estimated historical cumulative soiling / cleanliness state
-    for the requested location based on Solcast's HSU model.
+    """
+    Get historical soiling loss using the HSU model for up to 31 days of data at a time
+    for a requested location. Data is available from 2007-01-01T00:00Z to 7 days ago.
 
     Args:
-        latitude: Decimal degrees, between -90 and 90 (north positive).
-        longitude: Decimal degrees, between -180 and 180 (east positive).
-        start: Datetime-like (YYYY-MM-DD or ISO8601) start of period.
-        end: Optional, end of requested period (mutually exclusive with duration).
-        duration: Optional, ISO8601 duration within 31 days of start (mutually exclusive with end).
-        **kwargs: Additional query parameters accepted by the endpoint (e.g. depo_veloc_pm10, initial_soiling).
+        latitude: The latitude of the location you request data for. Must be a decimal
+            number between -90 and 90.
+        longitude: The longitude of the location you request data for. Must be a decimal
+            number between -180 and 180.
+        start: ISO_8601 compliant starting datetime for the historical data. If the
+            supplied value does not specify a timezone, the timezone will be inferred
+            from the time_zone parameter, if supplied. Otherwise UTC is assumed.
+        end: ISO_8601 compliant ending datetime for the historical data. Must be within
+            31 days of the start_date. Only one of end or duration should be part of the
+            request. If the supplied value does not specify a timezone, the timezone
+            will be inferred from the time_zone parameter, if supplied. Otherwise UTC is
+            assumed.
+        duration: ISO_8601 compliant duration for the historical data. Must be within 31
+            days of the start_date. Only one of end or duration should be part of the
+            request.
+        **kwargs: additional keyword arguments to be passed through as URL parameters to the Solcast API
 
     Returns:
         PandafiableResponse: Response object; call `.to_pandas()` for a DataFrame.
 
-    See https://docs.solcast.com.au/ for full parameter details.
+    See https://docs.solcast.com.au/ for full list of parameters.
     """
     assert (end is None and duration is not None) | (
         duration is None and end is not None
     ), "only one of duration or end"
 
     url = kwargs.pop("base_url", base_url)
+
     client = Client(
         base_url=url,
         endpoint=historic_soiling_hsu,
-        response_type=PandafiableResponse,  # type: ignore[arg-type]
+        response_type=PandafiableResponse,
     )
 
     params = {

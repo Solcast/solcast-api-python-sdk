@@ -15,7 +15,7 @@ __all__ = [
     "forecast",
     "historic",
     "live",
+    "pv_power_sites",
     "tmy",
     "unmetered_locations",
-    "pv_power_sites",
 ]
