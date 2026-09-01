@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.5.0] - 2026-09-01
+
+- Add `premium_pv_power` and `premium_wind_power` forecast endpoints for premium PV and wind power forecasts.
+- Update forecast documentation with the premium power forecast options.
 
 ## [1.4.0] - 2026-07-20
 
