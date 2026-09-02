@@ -42,6 +42,22 @@ def test_advanced_pv_power():
     assert res.success is True
 
 
+def test_premium_pv_power():
+    res = forecast.premium_pv_power(
+        resource_id="cbf6-a872-1cb2-566f",
+        hours=3,
+    )
+    assert res.success is True
+
+
+def test_premium_wind_power():
+    res = forecast.premium_wind_power(
+        resource_id="c533-fbce-05b5-b3ef",
+        hours=3,
+    )
+    assert res.success is True
+
+
 def test_soiling_kimber():
     lats, longs = load_test_locations_coordinates()
     res = forecast.soiling_kimber(
