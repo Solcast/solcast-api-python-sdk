@@ -2,16 +2,18 @@
 
 The `wind_power_site_measurements` module manages measured power data for Premium Wind Power sites.
 
-All measurement records use ISO-8601 timestamps. Site measurement power is measured in MW. See the [Premium Wind Power API documentation](https://docs.solcast.com.au/) for the complete request and response schemas.
+All measurement records use ISO-8601 timestamps. Site measurement power is measured in MW.
+
+See the Premium API schemas for [site upload](https://docs.solcast.com.au/docs/section/premium#postResourcesWindPowerSiteMeasurements), [site retrieval](https://docs.solcast.com.au/docs/section/premium#getResourcesWindPowerSiteMeasurements), and [site deletion](https://docs.solcast.com.au/docs/section/premium#deleteResourcesWindPowerSiteMeasurements). For sub-unit data, see [sub-unit upload](https://docs.solcast.com.au/docs/section/premium#postResourcesWindPowerSiteMeasurementsSubUnits), [sub-unit retrieval](https://docs.solcast.com.au/docs/section/premium#getResourcesWindPowerSiteMeasurementsSubUnits), and [sub-unit deletion](https://docs.solcast.com.au/docs/section/premium#deleteResourcesWindPowerSiteMeasurementsSubUnits).
 
 | Method | Purpose |
 |---|---|
 | `create_wind_site_measurements` | Submit site measurements. |
 | `get_wind_site_measurements` | Retrieve site measurements, with optional `start` and `end` filters. |
 | `delete_wind_site_measurements` | Delete site measurements between required `start` and `end` timestamps. |
-| `create_wind_sub_unit_site_measurements` | Submit measurements for labelled site sub-units. |
-| `get_wind_sub_unit_site_measurements` | Retrieve sub-unit measurements, optionally filtered by `sub_unit`, `start`, and `end`. |
-| `delete_wind_sub_unit_site_measurements` | Delete sub-unit measurements between required `start` and `end` timestamps. |
+| `create_wind_sub_unit_measurements` | Submit measurements for labelled site sub-units. |
+| `get_wind_sub_unit_measurements` | Retrieve sub-unit measurements, optionally filtered by `sub_unit`, `start`, and `end`. |
+| `delete_wind_sub_unit_measurements` | Delete sub-unit measurements between required `start` and `end` timestamps. |
 
 ## Create site measurements
 
@@ -35,7 +37,7 @@ response = wind_power_site_measurements.create_wind_site_measurements(
 Create sub-unit measurements with a `sub_unit` value on every record:
 
 ```python
-response = wind_power_site_measurements.create_wind_sub_unit_site_measurements(
+response = wind_power_site_measurements.create_wind_sub_unit_measurements(
     resource_id="your-premium-wind-site",
     measurements=[
         {
@@ -67,7 +69,7 @@ for start_index in range(0, len(measurements), 1000):
     print(f"Accepted {response.to_dict()['accepted']} measurements")
 ```
 
-Use the same batching pattern with `create_wind_sub_unit_site_measurements`; include a `sub_unit` label in each record.
+Use the same batching pattern with `create_wind_sub_unit_measurements`; include a `sub_unit` label in each record.
 
 Retrieve all matching records with `skip` and `take`. This example requests 100 records per page. The response has `offset`, `total`, and `results` fields:
 
@@ -95,6 +97,6 @@ while True:
         break
 ```
 
-For sub-unit data, use `get_wind_sub_unit_site_measurements` with the same `skip` and `take` parameters. Add `sub_unit` to filter to one turbine.
+For sub-unit data, use `get_wind_sub_unit_measurements` with the same `skip` and `take` parameters. Add `sub_unit` to filter to one turbine.
 
 All methods return the SDK `Response` object. Use `response.to_dict()` to inspect the JSON response.

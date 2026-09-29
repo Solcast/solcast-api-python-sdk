@@ -79,10 +79,21 @@ class PandafiableResponse(Response):
         if self.code != 200:
             raise Exception(self.exception)
 
-        dfs = [
-            pd.DataFrame.from_records(self.to_dict()[k]) for k in self.to_dict().keys()
-        ]
-        dfs = pd.concat(dfs)
+        response_data = self.to_dict()
+        if "results" in response_data:
+            records = response_data["results"]
+        else:
+            records = [
+                record
+                for result_list in response_data.values()
+                for record in result_list
+            ]
+
+        dfs = pd.DataFrame.from_records(records)
+        if dfs.empty:
+            dfs.index = pd.DatetimeIndex([], tz="UTC", name="period_end")
+            return dfs
+
         dfs.index = pd.DatetimeIndex(dfs["period_end"])
 
         # to make it work with different Pandas versions
