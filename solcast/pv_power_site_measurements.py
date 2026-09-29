@@ -32,7 +32,7 @@ def create_pv_site_measurements(
     )
 
     return client.post(
-        {**kwargs},
+        {"format": "json", **kwargs},
         json_body={
             "resource_id": resource_id,
             "measurements": measurements,
@@ -114,7 +114,7 @@ def create_pv_sub_unit_site_measurements(
     )
 
     return client.post(
-        {**kwargs},
+        {"format": "json", **kwargs},
         json_body={
             "resource_id": resource_id,
             "measurements": measurements,

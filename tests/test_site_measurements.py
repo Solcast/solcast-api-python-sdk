@@ -41,9 +41,10 @@ def test_create_pv_site_measurements_sends_json_body():
 
     request, parsed_url = capture_request(mock_urlopen)
     assert response.success is True
+    assert response.to_dict()["accepted"] == 1
     assert request.method == "POST"
     assert parsed_url.path == "/resources/pv_power_site_measurements"
-    assert parse_qs(parsed_url.query) == {}
+    assert parse_qs(parsed_url.query) == {"format": ["json"]}
     assert request.headers["Content-type"] == "application/json"
     assert json.loads(request.data) == {
         "resource_id": "pv-123",
@@ -58,6 +59,8 @@ def test_get_pv_sub_unit_site_measurements_sends_filters_as_query():
             sub_unit="inverter-1",
             start="2026-01-01T00:00:00Z",
             end="2026-01-02T00:00:00Z",
+            skip=20,
+            take=50,
             api_key="test-key",
         )
 
@@ -70,6 +73,8 @@ def test_get_pv_sub_unit_site_measurements_sends_filters_as_query():
         "sub_unit": ["inverter-1"],
         "start": ["2026-01-01T00:00:00Z"],
         "end": ["2026-01-02T00:00:00Z"],
+        "skip": ["20"],
+        "take": ["50"],
         "format": ["json"],
     }
 
@@ -115,9 +120,10 @@ def test_create_wind_sub_unit_site_measurements_sends_json_body():
 
     request, parsed_url = capture_request(mock_urlopen)
     assert response.success is True
+    assert response.to_dict()["accepted"] == 1
     assert request.method == "POST"
     assert parsed_url.path == "/resources/wind_power_site_measurements/sub_units"
-    assert parse_qs(parsed_url.query) == {}
+    assert parse_qs(parsed_url.query) == {"format": ["json"]}
     assert json.loads(request.data) == {
         "resource_id": "wind-123",
         "measurements": measurements,

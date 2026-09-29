@@ -37,8 +37,9 @@ nav:
         - '3.3 Comparing to Measurements: Accuracy Metrics': 'notebooks/3.3 Comparing to Measurements - Accuracy Metrics.ipynb'
         - '3.4 Rooftop PV Tuning': 'notebooks/3.4 Rooftop PV Tuning.ipynb'
         - '3.4b Rooftop Shading Corrections': 'notebooks/3.4b Rooftop Shading Corrections.ipynb'
-      - '4. Advanced PV Power':
+      - '4. Power Sites and Measurements':
         - '4.1 Advanced PV Power: Setting up and Using PV Sites': 'notebooks/4.1 Setting up and Using PV Sites.ipynb'
+        - '4.2 Premium PV and Wind: Site Measurements': 'notebooks/4.2 Premium PV and Wind Measurements.ipynb'
       - data:
         - '3.1_sample_measurements.csv': 'notebooks/data/3.1_sample_measurements.csv'
         - '3.2_sample_measurements.csv': 'notebooks/data/3.2_sample_measurements.csv'
