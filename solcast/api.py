@@ -4,7 +4,7 @@ import os
 import urllib.error
 import urllib.parse
 from dataclasses import dataclass
-from typing import Optional, Tuple
+from typing import Any, Dict, Optional, Tuple, Type
 from urllib.request import Request, urlopen
 
 import solcast
@@ -79,10 +79,21 @@ class PandafiableResponse(Response):
         if self.code != 200:
             raise Exception(self.exception)
 
-        dfs = [
-            pd.DataFrame.from_records(self.to_dict()[k]) for k in self.to_dict().keys()
-        ]
-        dfs = pd.concat(dfs)
+        response_data = self.to_dict()
+        if "results" in response_data:
+            records = response_data["results"]
+        else:
+            records = [
+                record
+                for result_list in response_data.values()
+                for record in result_list
+            ]
+
+        dfs = pd.DataFrame.from_records(records)
+        if dfs.empty:
+            dfs.index = pd.DatetimeIndex([], tz="UTC", name="period_end")
+            return dfs
+
         dfs.index = pd.DatetimeIndex(dfs["period_end"])
 
         # to make it work with different Pandas versions
@@ -105,7 +116,7 @@ class Client:
         self,
         base_url: str,
         endpoint: str,
-        response_type: Response,
+        response_type: Type[Response],
     ):
         """
         Args:
@@ -177,7 +188,9 @@ class Client:
         """
         return self._make_request(params, method="GET")
 
-    def post(self, params: dict) -> Response:
+    def post(
+        self, params: dict, json_body: Optional[Dict[str, Any]] = None
+    ) -> Response:
         """Wrap _make_request to make a POST request
 
         Args:
@@ -187,7 +200,7 @@ class Client:
             a Response object.
 
         """
-        return self._make_request(params, method="POST")
+        return self._make_request(params, method="POST", json_body=json_body)
 
     def patch(self, params: dict) -> Response:
         """Wrap _make_request to make a PATCH request
@@ -225,7 +238,9 @@ class Client:
         """
         return self._make_request(params, method="DELETE")
 
-    def _make_request(self, params: dict, method: str) -> Response:
+    def _make_request(
+        self, params: dict, method: str, json_body: Optional[Dict[str, Any]] = None
+    ) -> Response:
         """Make a request using urllib with the HTTP method specified
 
         Args:
@@ -237,10 +252,20 @@ class Client:
         """
 
         params, key = self._check_params(params)
-        url = self.url + "?" + urllib.parse.urlencode(params)
+        query = urllib.parse.urlencode(params)
+        url = self.url + (f"?{query}" if query else "")
+        headers = {
+            "Authorization": f"Bearer {key}",
+            "User-Agent": self.user_agent,
+        }
+        data = None
+        if json_body is not None:
+            data = json.dumps(json_body).encode("utf-8")
+            headers["Content-Type"] = "application/json"
         req = Request(
             url,
-            headers={"Authorization": f"Bearer {key}", "User-Agent": self.user_agent},
+            data=data,
+            headers=headers,
             method=method,
         )
         try:

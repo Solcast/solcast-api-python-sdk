@@ -1,4 +1,4 @@
-__version__ = "1.5.0"
+__version__ = "1.6.0"
 
 from . import (
     aggregations,
@@ -6,6 +6,8 @@ from . import (
     historic,
     live,
     pv_power_sites,
+    pv_power_site_measurements,
+    wind_power_site_measurements,
     tmy,
     unmetered_locations,
 )
@@ -16,6 +18,8 @@ __all__ = [
     "historic",
     "live",
     "pv_power_sites",
+    "pv_power_site_measurements",
+    "wind_power_site_measurements",
     "tmy",
     "unmetered_locations",
 ]

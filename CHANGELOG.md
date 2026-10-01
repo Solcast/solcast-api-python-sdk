@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.6.0] - 2026-09-30
+
+- Add Premium PV and Wind site measurement endpoints for site and sub-unit uploads, retrieval, and deletion.
+- Support pandas DataFrame uploads and paginated pandas responses for measurement data.
+- Add PV and Wind measurement documentation and notebook examples.
+
 ## [1.5.0] - 2026-09-01
 
 - Add `premium_pv_power` and `premium_wind_power` forecast endpoints for premium PV and wind power forecasts.
