@@ -1,4 +1,29 @@
-base_url = "https://api.solcast.com.au"
+import os
+from urllib.parse import urlsplit
+
+
+def _get_base_url() -> str:
+    configured_url = os.getenv(
+        "SOLCAST_API_BASE_URL", "https://api.solcast.com.au"
+    ).rstrip("/")
+    parsed_url = urlsplit(configured_url)
+    hostname = parsed_url.hostname
+    if (
+        parsed_url.scheme not in {"http", "https"}
+        or hostname is None
+        or "*" in hostname
+        or parsed_url.query
+        or parsed_url.fragment
+    ):
+        raise ValueError(
+            "SOLCAST_API_BASE_URL must be an absolute HTTP(S) URL without a "
+            "wildcard hostname, query, or fragment."
+        )
+
+    return configured_url
+
+
+base_url = _get_base_url()
 live_radiation_and_weather = "data/live/radiation_and_weather"
 live_rooftop_pv_power = "data/live/rooftop_pv_power"
 live_advanced_pv_power = "data/live/advanced_pv_power"
