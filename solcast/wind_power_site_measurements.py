@@ -65,7 +65,7 @@ def delete_wind_site_measurements(
     resource_id: str, start: str, end: str, **kwargs
 ) -> Response:
     """
-    Delete site measurements
+    Delete Site Measurements
 
     Args:
         resource_id: The unique identifier of the Premium Wind Power resource.
@@ -86,7 +86,6 @@ def delete_wind_site_measurements(
             "resource_id": resource_id,
             "start": start,
             "end": end,
-            "format": "json",
             **kwargs,
         }
     )
@@ -151,7 +150,7 @@ def delete_wind_sub_unit_measurements(
     resource_id: str, start: str, end: str, **kwargs
 ) -> Response:
     """
-    Delete sub-unit site measurements
+    Delete Sub-Unit Site Measurements
 
     Args:
         resource_id: The unique identifier of the Premium Wind Power resource.
@@ -172,7 +171,6 @@ def delete_wind_sub_unit_measurements(
             "resource_id": resource_id,
             "start": start,
             "end": end,
-            "format": "json",
             **kwargs,
         }
     )

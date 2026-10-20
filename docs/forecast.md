@@ -4,7 +4,7 @@ requested locations or resources, including premium PV and wind power forecasts,
 nowcasted for approx. four hours ahead) and numerical weather models (other data and longer horizons).
 More information in the [API docs](https://docs.solcast.com.au/#49090b36-66db-4d0f-89d5-87d19f00bec1).
 
-The module `forecast` has 5 available methods:
+The module `forecast` has 7 available methods:
 
 | Endpoint                | API Docs                                                                                  |
 |-------------------------|-------------------------------------------------------------------------------------------|
@@ -13,6 +13,8 @@ The module `forecast` has 5 available methods:
 | `advanced_pv_power`     | [details](https://docs.solcast.com.au/?#0c9d3ccf-e2a4-4583-86a3-f89c8d658fde){.md-button} |
 | `premium_pv_power`      | [details](https://docs.solcast.com.au/docs/section/premium#getDataForecastPremiumPvPower){.md-button} |
 | `premium_wind_power`    | [details](https://docs.solcast.com.au/docs/section/premium#getDataForecastPremiumWindPower){.md-button} |
+| `soiling_hsu`           | [details](https://docs.solcast.com.au/docs/section/soiling#getDataForecastSoilingHsu){.md-button} |
+| `soiling_kimber`        | [details](https://docs.solcast.com.au/docs/section/soiling#getDataForecastSoilingKimber){.md-button} |
 
 ### Example
 

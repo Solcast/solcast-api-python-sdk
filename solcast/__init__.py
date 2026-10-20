@@ -8,6 +8,8 @@ from . import (
     pv_power_sites,
     pv_power_site_measurements,
     wind_power_site_measurements,
+    wind_power_sites,
+    schedules,
     tmy,
     unmetered_locations,
 )
@@ -20,6 +22,8 @@ __all__ = [
     "pv_power_sites",
     "pv_power_site_measurements",
     "wind_power_site_measurements",
+    "wind_power_sites",
+    "schedules",
     "tmy",
     "unmetered_locations",
 ]

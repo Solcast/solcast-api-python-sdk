@@ -180,7 +180,6 @@ def test_delete_wind_site_measurements_sends_required_time_bounds():
         "resource_id": ["wind-123"],
         "start": ["2026-01-01T00:00:00Z"],
         "end": ["2026-01-02T00:00:00Z"],
-        "format": ["json"],
     }
 
 

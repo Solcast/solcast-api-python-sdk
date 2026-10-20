@@ -1,5 +1,13 @@
+from typing import Any, Dict, List
+from urllib.parse import quote
+
 from .api import Client, Response
-from .urls import base_url, pv_power_site, pv_power_sites
+from .urls import (
+    base_url,
+    pv_power_site,
+    pv_power_sites,
+    utility_scale_site_measurements,
+)
 
 
 def list_pv_power_sites(**kwargs) -> Response:
@@ -63,6 +71,21 @@ def create_pv_power_site(
             **kwargs,
         }
     )
+
+
+def create_utility_scale_site_measurements(
+    resource_id: str,
+    measurements: List[Dict[str, Any]],
+    **kwargs,
+) -> Response:
+    """Submit one or more measurements for an Advanced PV Power site."""
+    endpoint = utility_scale_site_measurements.format(
+        resource_id=quote(resource_id, safe="")
+    )
+    url = kwargs.pop("base_url", base_url)
+    client = Client(base_url=url, endpoint=endpoint, response_type=Response)
+
+    return client.post(kwargs, json_body={"measurements": measurements})
 
 
 def patch_pv_power_site(resource_id: str, **kwargs) -> Response:
