@@ -1,9 +1,13 @@
+from typing import Any, Dict, List
+from urllib.parse import quote
+
 from ._site_measurements import MeasurementInput, measurement_records
 from .api import Client, PandafiableResponse, Response
 from .urls import (
     base_url,
     pv_power_site_measurements,
     pv_power_site_measurements_sub_units,
+    utility_scale_site_measurements,
 )
 
 
@@ -41,6 +45,21 @@ def create_pv_site_measurements(
     )
 
 
+def create_utility_scale_site_measurements(
+    resource_id: str,
+    measurements: List[Dict[str, Any]],
+    **kwargs,
+) -> Response:
+    """Submit one or more measurements for an Advanced PV Power site."""
+    endpoint = utility_scale_site_measurements.format(
+        resource_id=quote(resource_id, safe="")
+    )
+    url = kwargs.pop("base_url", base_url)
+    client = Client(base_url=url, endpoint=endpoint, response_type=Response)
+
+    return client.post(kwargs, json_body={"measurements": measurements})
+
+
 def get_pv_site_measurements(resource_id: str, **kwargs) -> PandafiableResponse:
     """
     Retrieve historical measurement data for a Premium PV Power site. Supports
@@ -65,7 +84,7 @@ def delete_pv_site_measurements(
     resource_id: str, start: str, end: str, **kwargs
 ) -> Response:
     """
-    Delete site measurements
+    Delete Site Measurements
 
     Args:
         resource_id: The unique identifier of the Premium PV Power resource.
@@ -86,7 +105,6 @@ def delete_pv_site_measurements(
             "resource_id": resource_id,
             "start": start,
             "end": end,
-            "format": "json",
             **kwargs,
         }
     )
@@ -151,7 +169,7 @@ def delete_pv_sub_unit_measurements(
     resource_id: str, start: str, end: str, **kwargs
 ) -> Response:
     """
-    Delete sub-unit site measurements
+    Delete Sub-Unit Site Measurements
 
     Args:
         resource_id: The unique identifier of the Premium PV Power resource.
@@ -172,7 +190,6 @@ def delete_pv_sub_unit_measurements(
             "resource_id": resource_id,
             "start": start,
             "end": end,
-            "format": "json",
             **kwargs,
         }
     )

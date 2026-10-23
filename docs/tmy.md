@@ -4,12 +4,13 @@ TMY (Typical Meteorological Year) is a collation of historical weather data for 
 The dataset is derived from a multi-year time series specifically selected so that it presents the unique weather 
 phenomena for the location, and provides annual averages that are consistent with long term averages.
 See the [API docs](https://docs.solcast.com.au/#2144b738-a1f7-4647-9067-6e7f6eca32a8)
-The `tmy` module has 2 methods:
+The `tmy` module has 3 methods:
 
 | Endpoint                | API Docs                                                                                                                                            |
 |-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `radiation_and_weather` | [details](https://docs.solcast.com.au/?#e75039fa-86ec-43e4-99a3-389d3d7a4a99){.md-button}  |
 | `rooftop_pv_power`      | [details](https://docs.solcast.com.au/?#d117fde9-e410-4df0-bd07-e6168efd23cf){.md-button}  |
+| `advanced_pv_power`     | [details](https://docs.solcast.com.au/docs/section/advanced-pv-power#getDataTmyAdvancedPvPower){.md-button} |
 
 ### Example
 
@@ -24,6 +25,17 @@ res = tmy.rooftop_pv_power(
 
 res.to_pandas().head()
 ``` 
+
+Retrieve a Typical Meteorological Year for a registered Advanced PV site:
+
+```python
+res = tmy.advanced_pv_power(
+    resource_id="your-advanced-pv-resource",
+    output_parameters=["pv_power_advanced"],
+)
+
+res.to_pandas().head()
+```
 
 | period_end                |   pv_power_rooftop |
 |:--------------------------|-------------------:|

@@ -1,5 +1,10 @@
 from .api import Client, PandafiableResponse
-from .urls import base_url, tmy_radiation_and_weather, tmy_rooftop_pv_power
+from .urls import (
+    base_url,
+    tmy_advanced_pv_power,
+    tmy_radiation_and_weather,
+    tmy_rooftop_pv_power,
+)
 
 
 def radiation_and_weather(
@@ -68,3 +73,14 @@ def rooftop_pv_power(
             **kwargs,
         }
     )
+
+
+def advanced_pv_power(resource_id: str, **kwargs) -> PandafiableResponse:
+    """Get advanced PV power for a TMY at a registered site."""
+    url = kwargs.pop("base_url", base_url)
+    client = Client(
+        base_url=url,
+        endpoint=tmy_advanced_pv_power,
+        response_type=PandafiableResponse,
+    )
+    return client.get({"resource_id": resource_id, "format": "json", **kwargs})

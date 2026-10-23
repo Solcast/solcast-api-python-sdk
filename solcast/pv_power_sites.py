@@ -1,5 +1,9 @@
 from .api import Client, Response
-from .urls import base_url, pv_power_site, pv_power_sites
+from .urls import (
+    base_url,
+    pv_power_site,
+    pv_power_sites,
+)
 
 
 def list_pv_power_sites(**kwargs) -> Response:

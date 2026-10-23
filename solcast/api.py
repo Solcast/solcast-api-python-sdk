@@ -195,6 +195,7 @@ class Client:
 
         Args:
             params: a dictionary of parameters that are passed in the POST request
+            json_body: an optional JSON object to send as the request body
 
         Returns:
             a Response object.
@@ -202,29 +203,33 @@ class Client:
         """
         return self._make_request(params, method="POST", json_body=json_body)
 
-    def patch(self, params: dict) -> Response:
+    def patch(
+        self, params: dict, json_body: Optional[Dict[str, Any]] = None
+    ) -> Response:
         """Wrap _make_request to make a PATCH request
 
         Args:
             params: a dictionary of parameters that are passed in the PATCH request
+            json_body: an optional JSON object to send as the request body
 
         Returns:
             a Response object.
 
         """
-        return self._make_request(params, method="PATCH")
+        return self._make_request(params, method="PATCH", json_body=json_body)
 
-    def put(self, params: dict) -> Response:
+    def put(self, params: dict, json_body: Optional[Dict[str, Any]] = None) -> Response:
         """Wrap _make_request to make a PUT request
 
         Args:
             params: a dictionary of parameters that are passed in the PUT request
+            json_body: an optional JSON object to send as the request body
 
         Returns:
             a Response object.
 
         """
-        return self._make_request(params, method="PUT")
+        return self._make_request(params, method="PUT", json_body=json_body)
 
     def delete(self, params: dict) -> Response:
         """Wrap _make_request to make a DEL request
@@ -246,6 +251,7 @@ class Client:
         Args:
             params: a dictionary of parameters that are passed in the request
             method: HTTP method to use
+            json_body: an optional JSON object to serialize as the request body
 
         Returns:
             a Response object.
