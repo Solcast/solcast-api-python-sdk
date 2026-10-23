@@ -1,6 +1,9 @@
+import json
 import subprocess
 import sys
 from pathlib import Path
+from unittest.mock import patch
+from urllib.parse import parse_qs, urlsplit
 
 import pytest
 
@@ -11,6 +14,27 @@ from solcast.urls import (
     historic_radiation_and_weather,
     live_radiation_and_weather,
 )
+
+
+class FakeResponse:
+    code = 200
+
+    def __init__(self, body=b'{"accepted": 1}'):
+        self.body = body
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        return False
+
+    def read(self):
+        return self.body
+
+
+def capture_request(mock_urlopen):
+    request = mock_urlopen.call_args.args[0]
+    return request, urlsplit(request.full_url)
 
 
 @pytest.fixture
@@ -130,6 +154,25 @@ def test_client():
     )
 
     assert params["latitude"] == -33.856785
+
+
+def test_client_put_serializes_json_body_as_application_json():
+    body = {"resource_id": "pv-resource", "name": "PV site"}
+    client = Client(
+        base_url="https://api.solcast.com.au",
+        endpoint="resources/pv_power_site",
+        response_type=Response,
+    )
+
+    with patch("solcast.api.urlopen", return_value=FakeResponse()) as mock_urlopen:
+        response = client.put({"api_key": "test-key"}, json_body=body)
+
+    request, parsed_url = capture_request(mock_urlopen)
+    assert response.success is True
+    assert request.method == "PUT"
+    assert parse_qs(parsed_url.query) == {}
+    assert request.headers["Content-type"] == "application/json"
+    assert json.loads(request.data) == body
 
 
 def test_response():

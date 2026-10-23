@@ -1,6 +1,6 @@
-# Premium PV Site Measurements
+# PV Site Measurements
 
-The `pv_power_site_measurements` module manages measured power data for Premium PV Power sites.
+The `pv_power_site_measurements` module manages measured power data for Premium PV Power sites and utility-scale measurements for Advanced PV sites.
 
 All measurement records use ISO-8601 timestamps. Site measurement power is measured in MW.
 
@@ -11,6 +11,7 @@ See the Premium API schemas for [site upload](https://docs.solcast.com.au/docs/s
 | Method | Purpose |
 |---|---|
 | `create_pv_site_measurements` | Submit site measurements. |
+| `create_utility_scale_site_measurements` | Submit measured power data for an Advanced PV site. |
 | `get_pv_site_measurements` | Retrieve site measurements, with optional `start` and `end` filters. |
 | `delete_pv_site_measurements` | Delete site measurements between required `start` and `end` timestamps. |
 | `create_pv_sub_unit_measurements` | Submit measurements for labelled site sub-units. |
@@ -38,6 +39,25 @@ response = pv_power_site_measurements.create_pv_site_measurements(
     resource_id="your-premium-pv-site",
     measurements=measurements,
 )
+```
+
+## Create utility-scale site measurements
+
+Submit measured power records for an Advanced PV site:
+
+```python
+response = pv_power_site_measurements.create_utility_scale_site_measurements(
+    resource_id="your-advanced-pv-resource",
+    measurements=[
+        {
+            "period_end": "2026-01-01T00:05:00Z",
+            "period": "PT5M",
+            "total_power": 1.25,
+        }
+    ],
+)
+
+response.to_dict()
 ```
 
 Create sub-unit measurements with a `sub_unit` value on every record:

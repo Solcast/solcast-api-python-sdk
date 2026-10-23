@@ -57,6 +57,41 @@ def test_create_pv_site_measurements_sends_json_body():
     }
 
 
+def test_create_utility_scale_measurements_posts_json_to_resource_path():
+    measurements = [{"period_end": "2026-01-01T00:30:00Z", "total_power": 1.25}]
+    with patch("solcast.api.urlopen", return_value=FakeResponse()) as mock_urlopen:
+        response = pv_power_site_measurements.create_utility_scale_site_measurements(
+            resource_id="pv-resource",
+            measurements=measurements,
+            base_url="https://custom.example",
+            api_key="test-key",
+        )
+
+    request, parsed_url = capture_request(mock_urlopen)
+    assert response.success is True
+    assert request.method == "POST"
+    assert parsed_url.netloc == "custom.example"
+    assert parsed_url.path == "/utility_scale_sites/pv-resource/measurements"
+    assert parse_qs(parsed_url.query) == {}
+    assert request.headers["Content-type"] == "application/json"
+    assert json.loads(request.data) == {"measurements": measurements}
+
+
+def test_create_utility_scale_measurements_posts_single_record_as_one_item_array():
+    measurement = {"period_end": "2026-01-01T00:30:00Z", "total_power": 1.25}
+    with patch("solcast.api.urlopen", return_value=FakeResponse()) as mock_urlopen:
+        response = pv_power_site_measurements.create_utility_scale_site_measurements(
+            resource_id="pv-resource",
+            measurements=[measurement],
+            api_key="test-key",
+        )
+
+    request, parsed_url = capture_request(mock_urlopen)
+    assert response.success is True
+    assert parsed_url.path == "/utility_scale_sites/pv-resource/measurements"
+    assert json.loads(request.data) == {"measurements": [measurement]}
+
+
 def test_create_pv_site_measurements_accepts_dataframe():
     measurements = pd.DataFrame(
         {
@@ -216,6 +251,7 @@ def test_create_wind_sub_unit_measurements_sends_json_body():
 def test_measurement_modules_expose_all_site_and_sub_unit_operations():
     expected_pv_names = {
         "create_pv_site_measurements",
+        "create_utility_scale_site_measurements",
         "get_pv_site_measurements",
         "delete_pv_site_measurements",
         "create_pv_sub_unit_measurements",

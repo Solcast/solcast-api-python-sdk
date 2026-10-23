@@ -18,7 +18,7 @@ nav:
   - Schedules: schedules.md
   - PV Power Sites: pv_power_sites.md
   - Wind Power Sites: wind_power_sites.md
-  - Premium PV Site Measurements: pv_power_site_measurements.md
+  - PV Site Measurements: pv_power_site_measurements.md
   - Premium Wind Site Measurements: wind_power_site_measurements.md
   - Aggregations: aggregations.md
   - Example Notebooks:
